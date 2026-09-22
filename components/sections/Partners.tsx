@@ -48,13 +48,20 @@ export function Partners() {
   return (
     <Section id="partners" tone="white" labelledBy="partners-heading">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-12">
           <div className="lg:col-span-4">
             <Eyebrow tone="gold" rule="above">
               {activeTab.eyebrow}
             </Eyebrow>
-            <Heading id="partners-heading" plain={partners.headline} className="mt-6" />
-            <Lede className="mt-6 max-w-[40ch]">{partners.supporting}</Lede>
+            <Heading
+              id="partners-heading"
+              plain={partners.headline}
+              size="sm"
+              className="mt-6"
+            />
+            <Lede className="mt-6 max-w-[40ch] text-[0.9375rem] sm:text-base">
+              {partners.supporting}
+            </Lede>
 
             {stats.length > 0 ? (
               <dl className="mt-10 grid grid-cols-3 gap-x-4">
@@ -62,12 +69,12 @@ export function Partners() {
                   <div key={stat.label} className={i > 0 ? "border-l border-line pl-4" : ""}>
                     <dt className="sr-only">{stat.label}</dt>
                     <dd>
-                      <span className="block text-[1.5rem] font-extrabold tracking-tight text-gold sm:text-[1.75rem]">
+                      <span className="block text-[1.25rem] font-extrabold tracking-tight text-gold sm:text-[1.5rem]">
                         {stat.value}
                       </span>
                       <span
                         aria-hidden="true"
-                        className="mt-1 block text-[0.8125rem] leading-snug text-body"
+                        className="mt-1 block text-[0.75rem] leading-snug text-body"
                       >
                         {stat.label}
                       </span>
