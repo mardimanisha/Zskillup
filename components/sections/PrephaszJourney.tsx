@@ -47,15 +47,19 @@ import { Icon, type IconName } from "@/components/ui/Icon";
 
 const icons: IconName[] = ["book", "file", "chart", "graduation", "briefcase", "trending"];
 
-/** Tints sampled from the reference: icon well, icon stroke, and the card's own
- *  pastel field when collapsed (top -> bottom, fading lighter). */
+/** Every card shares the same icon well / icon colour (the brand yellow, with
+ *  a subtle gradient on the well) and the same collapsed pastel field. */
+const ICON_WELL = "bg-gradient-to-b from-[#fdefc9] to-[#fbe2a0]";
+const ICON_COLOR = "text-[#a86f00]";
+const CARD_TINT = "from-white to-white";
+
 const tints: { well: string; icon: string; card: string }[] = [
-  { well: "bg-[#fdefc9]", icon: "text-[#a86f00]", card: "from-[#fdf4dc] to-[#fef9ec]" },
-  { well: "bg-[#dde9fe]", icon: "text-[#1a68f0]", card: "from-[#e9f0fe] to-[#f4f7fe]" },
-  { well: "bg-[#fde0e4]", icon: "text-[#d3204f]", card: "from-[#fdecef] to-[#fef5f6]" },
-  { well: "bg-[#d5f5e2]", icon: "text-[#0a8a4e]", card: "from-[#e6f8ee] to-[#f2fbf6]" },
-  { well: "bg-[#eadffd]", icon: "text-[#8b2fe0]", card: "from-[#f2ebfe] to-[#f8f4ff]" },
-  { well: "bg-[#d7f6ee]", icon: "text-[#0f9a78]", card: "from-[#e4f9f5] to-[#f1fcfa]" },
+  { well: ICON_WELL, icon: ICON_COLOR, card: CARD_TINT },
+  { well: ICON_WELL, icon: ICON_COLOR, card: CARD_TINT },
+  { well: ICON_WELL, icon: ICON_COLOR, card: CARD_TINT },
+  { well: ICON_WELL, icon: ICON_COLOR, card: CARD_TINT },
+  { well: ICON_WELL, icon: ICON_COLOR, card: CARD_TINT },
+  { well: ICON_WELL, icon: ICON_COLOR, card: CARD_TINT },
 ];
 
 const pillars = prephasz.pillars;
@@ -200,10 +204,10 @@ export function PrephaszJourney() {
                   >
                     <Icon name={icons[i]} className={`h-[1.3rem] w-[1.3rem] lg:h-7 lg:w-7 ${tint.icon}`} />
                   </span>
-                  <span className="mt-4 text-base font-medium text-[#485a8a] lg:mt-5 lg:text-xl">
+                  <span className="mt-4 text-sm font-medium text-[#485a8a] lg:mt-5 lg:text-lg">
                     {pad(i)}
                   </span>
-                  <span className="mt-1.5 text-[0.75rem] leading-tight font-semibold text-navy lg:mt-2 lg:text-[0.95rem] min-[75rem]:text-[1.05rem]">
+                  <span className="mt-1.5 text-[0.68rem] leading-tight font-semibold text-navy lg:mt-2 lg:text-[0.85rem] min-[75rem]:text-[0.92rem]">
                     {pillar.title}
                   </span>
                 </div>
@@ -278,7 +282,7 @@ function ExpandedFace({
       {...rest}
       className={`flex w-full items-start gap-3 px-5 pt-[1.125rem] pb-4 sm:gap-4 sm:px-8 md:w-[var(--open)] md:px-5 lg:px-8 ${className}`}
     >
-      <span className="absolute top-5 right-5 text-lg font-medium text-[#5b6a92] sm:top-6 sm:right-8 sm:text-xl md:right-5 lg:right-8 min-[75rem]:text-[1.375rem]">
+      <span className="absolute top-5 right-5 text-base font-medium text-[#5b6a92] sm:top-6 sm:right-8 sm:text-lg md:right-5 lg:right-8 min-[75rem]:text-[1.15rem]">
         {pad(i)}
       </span>
 
@@ -299,13 +303,13 @@ function ExpandedFace({
         {/* The right inset keeps the title clear of the step number, which sits
             in the top-right corner of this same row: a long title wraps instead
             of running underneath it. */}
-        <h4 className="pr-7 text-[1.5rem] leading-none font-extrabold tracking-[-0.03em] text-navy sm:text-[1.95rem] md:text-[1.75rem] lg:text-[1.95rem] min-[75rem]:pr-9 min-[75rem]:text-[2.1rem]">
+        <h4 className="pr-7 text-[1.25rem] leading-none font-extrabold tracking-[-0.03em] text-navy sm:text-[1.6rem] md:text-[1.45rem] lg:text-[1.6rem] min-[75rem]:pr-9 min-[75rem]:text-[1.75rem]">
           {pillar.title}
         </h4>
 
         {/* Width cap is in em, so the description keeps the same measure as
             its type scales. */}
-        <p className="mt-1.5 max-w-[18.5em] text-pretty text-[0.834rem] leading-snug font-medium text-[#5b6a92] sm:text-[0.979rem] md:text-[0.834rem] lg:text-[0.979rem] min-[75rem]:text-[1.09rem]">
+        <p className="mt-1.5 max-w-[18.5em] text-pretty text-[0.75rem] leading-snug font-medium text-[#5b6a92] sm:text-[0.85rem] md:text-[0.75rem] lg:text-[0.85rem] min-[75rem]:text-[0.94rem]">
           {pillar.tagline}
         </p>
 
@@ -315,7 +319,7 @@ function ExpandedFace({
           {pillar.features.map((feature) => (
             <li
               key={feature}
-              className={`flex items-center rounded-full px-[0.89rem] py-2 text-[0.694rem] leading-tight font-medium text-[#485a8a] sm:px-4 sm:text-[0.779rem] md:px-[0.89rem] md:text-[0.694rem] lg:px-4 lg:text-[0.779rem] min-[75rem]:px-[1.1125rem] min-[75rem]:py-2.5 min-[75rem]:text-[0.89rem] ${tint.well}`}
+              className={`flex items-center rounded-full px-[0.89rem] py-2 text-[0.64rem] leading-tight font-medium text-[#485a8a] sm:px-4 sm:text-[0.7rem] md:px-[0.89rem] md:text-[0.64rem] lg:px-4 lg:text-[0.7rem] min-[75rem]:px-[1.1125rem] min-[75rem]:py-2.5 min-[75rem]:text-[0.8rem] ${tint.well}`}
             >
               {feature}
             </li>

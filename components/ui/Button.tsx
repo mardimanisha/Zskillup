@@ -48,7 +48,7 @@ const sized: Record<string, string> = {
 const verticalFill: Record<VerticalTone, string> = {
   institutions: "bg-inst text-white hover:bg-inst-ink",
   // Yellow needs dark text to stay legible - never white on yellow.
-  prephasz: "bg-prep text-navy hover:bg-[#e6b912]",
+  prephasz: "bg-gradient-to-r from-[#f9d94e] to-[#f0a51c] text-navy hover:from-[#f7d033] hover:to-[#e6980f]",
   commerce: "bg-com text-white hover:bg-com-ink",
 };
 

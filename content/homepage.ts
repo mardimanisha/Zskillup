@@ -190,7 +190,7 @@ export const chooseRoute: {
       vertical: "commerce",
       kicker: "Real opportunities",
       eyebrow: "For Global Finance Careers",
-      brand: "B.Com + Global Finance & AI",
+      brand: "Global Finance & AI Professional Program",
       title: "Future-Ready.\nAI-Enabled.\nGlobally Employable.",
       body: "Global Finance & AI Professional Program. Build practical finance and AI skills for the global workplace.",
       features: ["B.Com + professional program", "Finance and AI skills", "Global career opportunities"],
@@ -378,32 +378,31 @@ export const commerce = {
   eyebrow: "A ZSKILLUP CAREER PATHWAY",
   /** Two deliberate lines; the accent colour lands on the closing phrase. */
   headline: {
-    line1: "B.Com + Global Finance & AI,",
+    line1: "Global Finance & AI,",
     line2Plain: "built for",
-    line2Accent: "careers beyond the degree.",
+    line2Accent: "the careers of tomorrow.",
   },
   supporting:
-    "The Global Finance & AI Professional Program brings together a B.Com degree, finance and AI learning, career development, and industry exposure.",
+    "The Global Finance & AI Professional Program combines practical finance knowledge, AI-enabled skills, career development, and industry exposure.",
   /** Handwritten accent 2 of 2 on the homepage. */
   handwritten: "More opportunities ahead",
   /** Three connected blocks reading as ONE integrated pathway, one colour family. */
   pathway: [
-    { title: "B.Com", body: "Build a strong academic foundation." },
-    { title: "Finance + AI", body: "Develop skills for a changing finance world." },
-    { title: "Career Development", body: "Prepare for the workplace." },
+    { title: "Global Finance", body: "Build practical knowledge for modern finance careers." },
+    { title: "AI-Enabled Skills", body: "Learn to use AI in a changing workplace." },
+    { title: "Career Development", body: "Strengthen the skills employers value." },
   ],
   /** Sits beneath the three blocks as a smaller, secondary note. */
   industryExposure: {
     title: "Industry Exposure",
-    body: "Connect learning with real-world practice.",
+    body: "Connect your learning with real-world practice.",
   },
   /** Printed on the stacked books in the photograph, top to bottom. */
-  bookSpines: ["B.Com", "Finance + AI", "Global Careers"],
-  shortNote: "Program components and availability may vary by university.",
+  bookSpines: ["Global Finance", "AI Skills", "Global Careers"],
+  shortNote: "Program components and availability may vary by institution.",
   careersHeadline: "Explore career pathways",
   careersBody:
-    "Discover possible directions across accounting, audit, business finance, risk, tax, consulting, and financial services.",
-  careersCaveat: "Career outcomes depend on individual skills and opportunities.",
+    "Discover opportunities across accounting, audit, business finance, risk, tax, consulting, fintech, and financial services.",
   careers: [
     "Accounting",
     "Audit",
@@ -411,6 +410,7 @@ export const commerce = {
     "Risk",
     "Tax",
     "Consulting",
+    "Fintech",
     "Financial Services",
   ],
   primaryCta: { label: "Explore the Program", href: "#partner-with-us" },

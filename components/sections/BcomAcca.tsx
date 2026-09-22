@@ -46,6 +46,7 @@ const careerIcons: Record<string, IconName> = {
   Risk: "shield",
   Tax: "receipt",
   Consulting: "users",
+  Fintech: "coins",
   "Financial Services": "landmark",
 };
 
@@ -191,11 +192,11 @@ export function BcomAcca() {
                 {commerce.careersHeadline}
               </h3>
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-body">
-                {commerce.careersBody} {commerce.careersCaveat}
+                {commerce.careersBody}
               </p>
             </div>
 
-            <ul className="grid grid-cols-2 gap-y-6 sm:grid-cols-4 lg:col-span-8 lg:grid-cols-7 lg:gap-y-0">
+            <ul className="grid grid-cols-2 gap-y-6 sm:grid-cols-4 lg:col-span-8 lg:grid-cols-8 lg:gap-y-0">
               {commerce.careers.map((career, i) => (
                 <li
                   key={career}
