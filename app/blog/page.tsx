@@ -23,7 +23,7 @@ function formatDate(iso: string) {
 function CategoryPill({ category, label }: { category: BlogCategory; label: string }) {
   return (
     <span
-      className={`inline-block rounded-full px-2.5 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wide ${categoryColors[category]}`}
+      className={`inline-block w-fit self-start rounded-full px-2.5 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wide ${categoryColors[category]}`}
     >
       {label}
     </span>
