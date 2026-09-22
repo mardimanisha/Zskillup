@@ -87,7 +87,7 @@ import { Handwritten } from "@/components/ui/Stats";
  * final values immediately, consistent with how decorative (not user-
  * driven) motion is handled elsewhere on this site. */
 
-const NUMBER_SIZE = "text-[1.25rem] min-[640px]:text-[1.875rem] min-[1450px]:text-[2.25rem]";
+const NUMBER_SIZE = "text-[1.0625rem] min-[640px]:text-[1.5rem] min-[1450px]:text-[1.875rem]";
 /** Every card is `aspect-square` now (see below), so height parity across
     the row no longer needs the min-h reservation the previous icon-drawn
     version relied on - the card's own footprint is fixed regardless of how
@@ -217,9 +217,9 @@ export function HomepageStats() {
                   alt=""
                   fill
                   sizes="(min-width: 1450px) 15vw, (min-width: 640px) 30vw, 45vw"
-                  className="object-contain"
+                  className="translate-y-[12%] object-contain"
                 />
-                <div className="relative flex h-full flex-col px-3 py-3 sm:px-5 sm:py-6">
+                <div className="relative flex h-full flex-col px-3 pt-8 pb-3 sm:px-5 sm:pt-11 sm:pb-6">
                   <p
                     className={`${NUMBER_SIZE} leading-none font-extrabold tracking-tight whitespace-nowrap tabular-nums ${
                       stat.highlight ? "text-white" : "text-navy"
