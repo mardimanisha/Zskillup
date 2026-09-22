@@ -33,7 +33,7 @@ function CategoryPill({ category, label }: { category: BlogCategory; label: stri
 function FeaturedCard({ post }: { post: BlogPost }) {
   return (
     <Link
-      href={`/insights/${post.slug}`}
+      href={`/blog/${post.slug}`}
       className="group relative col-span-2 flex min-h-[340px] flex-col justify-end overflow-hidden rounded-2xl bg-navy"
     >
       {post.coverImage && (
@@ -57,12 +57,17 @@ function FeaturedCard({ post }: { post: BlogPost }) {
           {post.title}
         </h3>
         <p className="mt-2 text-[0.9375rem] leading-relaxed text-white/70">{post.excerpt}</p>
-        <div className="mt-4 flex items-center gap-3 text-[0.8125rem] text-white/50">
-          <span>{post.author.name}</span>
-          <span>·</span>
-          <span>{formatDate(post.date)}</span>
-          <span>·</span>
-          <span>{post.readTime} min read</span>
+        <div className="mt-4 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 text-[0.8125rem] text-white/50">
+            <span>{post.author.name}</span>
+            <span>·</span>
+            <span>{formatDate(post.date)}</span>
+            <span>·</span>
+            <span>{post.readTime} min read</span>
+          </div>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-4 py-1.5 text-[0.8125rem] font-semibold text-white ring-1 ring-white/25 transition-colors group-hover:bg-white/25">
+            Read More →
+          </span>
         </div>
       </div>
     </Link>
@@ -72,7 +77,7 @@ function FeaturedCard({ post }: { post: BlogPost }) {
 function SmallCard({ post }: { post: BlogPost }) {
   return (
     <Link
-      href={`/insights/${post.slug}`}
+      href={`/blog/${post.slug}`}
       className="group flex flex-col gap-3 rounded-2xl border border-line bg-white p-5 transition-shadow hover:shadow-card"
     >
       <div className="flex items-start gap-3">
@@ -95,9 +100,14 @@ function SmallCard({ post }: { post: BlogPost }) {
         </div>
       </div>
       <p className="text-[0.8125rem] leading-relaxed text-body line-clamp-2">{post.excerpt}</p>
-      <p className="text-[0.75rem] text-muted">
-        {formatDate(post.date)} · {post.readTime} min read
-      </p>
+      <div className="flex items-center justify-between">
+        <p className="text-[0.75rem] text-muted">
+          {formatDate(post.date)} · {post.readTime} min read
+        </p>
+        <span className="text-[0.8125rem] font-semibold text-brand transition-colors group-hover:text-brand-deep">
+          Read More →
+        </span>
+      </div>
     </Link>
   );
 }
@@ -105,7 +115,7 @@ function SmallCard({ post }: { post: BlogPost }) {
 function LatestCard({ post }: { post: BlogPost }) {
   return (
     <Link
-      href={`/insights/${post.slug}`}
+      href={`/blog/${post.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition-shadow hover:shadow-card"
     >
       <div className="relative h-44 w-full overflow-hidden bg-[#eef0fc]">
@@ -125,9 +135,14 @@ function LatestCard({ post }: { post: BlogPost }) {
           {post.title}
         </h3>
         <p className="text-[0.8125rem] leading-relaxed text-body line-clamp-2">{post.excerpt}</p>
-        <p className="mt-1 text-[0.75rem] text-muted">
-          {formatDate(post.date)} · {post.readTime} min read
-        </p>
+        <div className="mt-1 flex items-center justify-between">
+          <p className="text-[0.75rem] text-muted">
+            {formatDate(post.date)} · {post.readTime} min read
+          </p>
+          <span className="text-[0.8125rem] font-semibold text-brand transition-colors group-hover:text-brand-deep">
+            Read More →
+          </span>
+        </div>
       </div>
     </Link>
   );
@@ -324,12 +339,6 @@ export default function InsightsPage() {
           <div className="mt-8">
             <div className="flex items-center justify-between">
               <h2 className="text-[1.25rem] font-extrabold text-navy">Latest Posts</h2>
-              <Link
-                href="/insights/all"
-                className="text-[0.8125rem] font-semibold text-brand underline underline-offset-4 hover:text-brand-deep"
-              >
-                View All →
-              </Link>
             </div>
 
             {latestPosts.length > 0 ? (

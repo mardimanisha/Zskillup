@@ -131,6 +131,19 @@
     border-radius: 4px;
   }
 
+  /* Browsers only default `cursor: pointer` on <a>; <button> and role="button"
+     elements default to the arrow cursor. Every CTA on the site should read
+     as clickable. */
+  button:not(:disabled),
+  [role="button"],
+  a {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
   ::selection {
     background: var(--color-brand-soft);
     color: var(--color-navy);

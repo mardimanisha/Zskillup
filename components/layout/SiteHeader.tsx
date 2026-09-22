@@ -79,20 +79,68 @@ export function SiteHeader() {
           <nav aria-label="Primary" className="hidden lg:block">
             {/* Divider pipes between items, as in the design. */}
             <ul className="flex items-center">
-              {nav.map((item, i) => (
-                <li key={item.label} className="flex items-center">
-                  {i > 0 ? (
-                    <span aria-hidden="true" className="h-4 w-px bg-navy/15" />
-                  ) : null}
-                  <Link
-                    href={item.href}
-                    aria-label={item.label === "prephasz" ? "prephasz, Powered by ZSkillup" : undefined}
-                    className="rounded-full px-4 py-2 text-[0.9375rem] font-medium text-navy/85 transition-colors hover:text-navy"
-                  >
-                    {item.label === "prephasz" ? <PrephaszLogo className="h-6" /> : item.label}
-                  </Link>
-                </li>
-              ))}
+              {nav.map((item, i) => {
+                const hasChildren = "children" in item && item.children.length > 0;
+                return (
+                  <li key={item.label} className={`relative flex items-center${hasChildren ? " group" : ""}`}>
+                    {i > 0 ? (
+                      <span aria-hidden="true" className="h-4 w-px bg-navy/15" />
+                    ) : null}
+                    {hasChildren ? (
+                      <span className="flex items-center gap-1 cursor-default rounded-full px-4 py-2 text-[0.9375rem] font-medium text-navy/85 transition-colors group-hover:text-navy">
+                        {item.label}
+                        <svg
+                          className="h-3.5 w-3.5 transition-transform group-hover:rotate-180"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                          aria-hidden="true"
+                        >
+                          <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        aria-label={item.label === "prephasz" ? "prephasz, Powered by ZSkillup" : undefined}
+                        className="rounded-full px-4 py-2 text-[0.9375rem] font-medium text-navy/85 transition-colors hover:text-navy"
+                      >
+                        {item.label === "prephasz" ? <PrephaszLogo className="h-6" /> : item.label}
+                      </Link>
+                    )}
+                    {hasChildren && (
+                      // The pt-2 here (not a margin on the card below) is deliberate: a margin
+                      // would leave a gap between the trigger and the card that isn't part of
+                      // this element's own box, so the pointer exits the hoverable area and the
+                      // card closes before the mouse ever reaches it. Padding keeps that space
+                      // inside the box - still invisible, but still hoverable - so the card
+                      // stays open while crossing it.
+                      <div className="pointer-events-none absolute left-1/2 top-full w-72 -translate-x-1/2 pt-2 opacity-0 transition-opacity duration-150 group-hover:pointer-events-auto group-hover:opacity-100">
+                        <div className="rounded-2xl border border-line bg-white p-2 shadow-xl shadow-navy/[0.08]">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.label}
+                              href={child.href}
+                              className="group/card flex items-start gap-3.5 rounded-xl p-3 transition-colors hover:bg-brand-soft"
+                            >
+                              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-soft text-brand transition-colors group-hover/card:bg-white">
+                                <Icon name={"icon" in child ? child.icon : "file"} className="h-5 w-5" />
+                              </span>
+                              <span className="flex flex-col gap-0.5 pt-0.5">
+                                <span className="text-sm font-semibold text-navy">{child.label}</span>
+                                {"description" in child ? (
+                                  <span className="text-[0.8125rem] leading-snug text-muted">
+                                    {child.description}
+                                  </span>
+                                ) : null}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
@@ -129,18 +177,50 @@ export function SiteHeader() {
         <Container className="py-5">
           <nav aria-label="Primary (mobile)">
             <ul className="flex flex-col">
-              {nav.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    aria-label={item.label === "prephasz" ? "prephasz, Powered by ZSkillup" : undefined}
-                    className="block border-b border-line-soft py-3.5 text-lg font-semibold text-navy"
-                  >
-                    {item.label === "prephasz" ? <PrephaszLogo className="h-7" /> : item.label}
-                  </Link>
-                </li>
-              ))}
+              {nav.map((item) => {
+                const hasChildren = "children" in item && item.children.length > 0;
+                return (
+                  <li key={item.label}>
+                    {hasChildren ? (
+                      <>
+                        <span className="block border-b border-line-soft py-3.5 text-lg font-semibold text-navy">
+                          {item.label}
+                        </span>
+                        <ul className="flex flex-col gap-1.5 py-3">
+                          {item.children.map((child) => (
+                            <li key={child.label}>
+                              <Link
+                                href={child.href}
+                                onClick={() => setOpen(false)}
+                                className="flex items-center gap-3 rounded-xl p-2.5 transition-colors active:bg-brand-soft"
+                              >
+                                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-soft text-brand">
+                                  <Icon name={"icon" in child ? child.icon : "file"} className="h-4.5 w-4.5" />
+                                </span>
+                                <span className="flex flex-col">
+                                  <span className="text-base font-medium text-navy">{child.label}</span>
+                                  {"description" in child ? (
+                                    <span className="text-sm text-muted">{child.description}</span>
+                                  ) : null}
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        onClick={() => setOpen(false)}
+                        aria-label={item.label === "prephasz" ? "prephasz, Powered by ZSkillup" : undefined}
+                        className="block border-b border-line-soft py-3.5 text-lg font-semibold text-navy"
+                      >
+                        {item.label === "prephasz" ? <PrephaszLogo className="h-7" /> : item.label}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
           <Button

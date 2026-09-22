@@ -28,7 +28,7 @@ const SECTION_TARGETS: Target[] = [
   { label: "Our Partners", hint: "Institutions and hiring network", href: "#partners" },
   { label: "Testimonials", hint: "Real people. Real progress.", href: "#testimonials" },
   { label: "ZSkillup in Action", hint: "Events and moments", href: "#in-action" },
-  { label: "Insights", hint: "Education and career content", href: "/insights" },
+  { label: "Insights", hint: "Education and career content", href: "/blog" },
   { label: "Partner With Us", hint: "Talk to the ZSkillup team", href: "#partner-with-us" },
 ];
 

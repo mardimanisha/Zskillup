@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { asset } from "@/lib/asset";
 import {
+  badgeColors,
+  badgeLabels,
   featuredEvents,
-  galleryFilters,
   galleryPhotos,
   inAction,
-  type GalleryCategory,
 } from "@/content/events";
 import { Icon } from "@/components/ui/Icon";
 import { Container, Eyebrow, Heading, Section } from "@/components/ui/Section";
@@ -18,24 +18,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/events" },
 };
 
-const badgeColors: Record<string, string> = {
-  "campus-programs": "bg-[#ede9fe] text-[#6d28d9]",
-  "community":       "bg-[#dcfce7] text-[#16a34a]",
-  "industry":        "bg-[#fff3e0] text-[#ea6c00]",
-  "workshops":       "bg-[#ede9fe] text-[#6d28d9]",
-  "events":          "bg-[#fce7f3] text-[#be185d]",
-  "expert-talks":    "bg-[#fff3e0] text-[#ea6c00]",
-};
-
-const badgeLabels: Record<string, string> = {
-  "campus-programs": "Campus Program",
-  "community":       "Community",
-  "industry":        "Industry",
-  "workshops":       "Workshop",
-  "events":          "Event",
-  "expert-talks":    "Expert Talk",
-};
-
 const featured = featuredEvents[0];
 
 export default function EventsPage() {
@@ -43,9 +25,9 @@ export default function EventsPage() {
     <>
       {/* Hero: Featured Event */}
       <Section tone="lavender" className="!py-0 !scroll-mt-0">
-        <div className="p-4 sm:p-5">
+        <Container className="!max-w-none !px-4 py-4 sm:!px-5 sm:py-5">
           {/* Featured card — image fades into white left panel */}
-          <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-navy/5" style={{minHeight: "calc(100dvh - 240px)"}}>
+          <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-navy/5" style={{minHeight: "clamp(360px, 55dvh, 520px)"}}>
             {/* Image fills the right ~65%, absolutely positioned */}
             <div className="absolute inset-y-0 right-0 w-full lg:w-[65%]">
               <Image
@@ -73,21 +55,12 @@ export default function EventsPage() {
               >
                 <Icon name="play" className="h-6 w-6 translate-x-0.5" />
               </button>
-              {/* Thumbnail strip — bottom, starting at left edge of visible image */}
-              <div className="absolute bottom-5 right-5 flex items-end gap-2.5">
-                {galleryPhotos.slice(0, 3).map((p, i) => (
-                  <div key={p.src + i} className="relative h-[120px] w-[160px] overflow-hidden rounded-xl ring-2 ring-white/70">
-                    <Image src={asset(p.src)} alt="" fill sizes="160px" className="object-cover" />
-                  </div>
-                ))}
-                <div className="grid h-[120px] w-[120px] place-items-center rounded-xl bg-black/60 text-center text-[0.875rem] font-bold leading-tight text-white ring-2 ring-white/70 backdrop-blur-sm">
-                  +{galleryPhotos.length - 3}<br />photos
-                </div>
-              </div>
             </div>
 
-            {/* Text content — absolutely fills full height of left panel */}
-            <div className="absolute inset-y-0 left-0 z-10 flex w-full flex-col justify-center px-10 py-10 lg:w-[44%] lg:px-14 lg:py-14">
+            {/* Text content — breaks out to full viewport width (independent of the card's own inset) so its inner gutter lines up exactly with the page Container below. Inline styles used for the breakout so it doesn't depend on a transform utility being composed correctly. */}
+            <div className="absolute inset-y-0 z-10 h-full" style={{ left: "50%", width: "100vw", transform: "translateX(-50%)" }}>
+            <div className="mx-auto flex h-full w-full max-w-[1240px] items-center px-5 sm:px-8">
+            <div className="flex w-full flex-col justify-center py-10 lg:w-[44%] lg:py-14">
               <span className="inline-flex w-fit items-center gap-2 rounded-full bg-brand-soft px-4 py-1.5 text-[0.8125rem] font-semibold uppercase tracking-wide text-brand">
                 <Icon name="star" className="h-3.5 w-3.5" />
                 {inAction.featuredBadge}
@@ -116,17 +89,17 @@ export default function EventsPage() {
                 {featured.caption}
               </p>
 
-              <div className="mt-7 flex flex-wrap gap-4">
+              <div className="mt-7 flex flex-nowrap items-center gap-3 sm:gap-4">
                 <a
                   href="#all-events"
-                  className="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3 text-[0.9375rem] font-semibold text-white transition-opacity hover:opacity-90"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-5 py-3 text-[0.875rem] font-semibold text-white transition-opacity hover:opacity-90 sm:px-7 sm:text-[0.9375rem]"
                 >
                   View Full Album
                   <Icon name="arrowRight" className="h-4 w-4" />
                 </a>
                 <button
                   type="button"
-                  className="inline-flex items-center gap-2 rounded-full border border-navy/25 px-6 py-3 text-[0.9375rem] font-semibold text-navy transition-colors hover:border-navy/50"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full border border-navy/25 px-4 py-3 text-[0.875rem] font-semibold text-navy transition-colors hover:border-navy/50 sm:px-6 sm:text-[0.9375rem]"
                 >
                   <span className="grid h-5 w-5 place-items-center rounded-full border border-navy/30">
                     <Icon name="play" className="h-3.5 w-3.5 translate-x-px" />
@@ -135,25 +108,18 @@ export default function EventsPage() {
                 </button>
               </div>
             </div>
+            </div>
+            </div>
           </div>
-        </div>
+        </Container>
       </Section>
 
       {/* Gallery grid */}
-      <Section id="all-events" tone="white" labelledBy="all-events-heading">
+      <Section id="all-events" tone="white" labelledBy="all-events-heading" className="!pt-10 sm:!pt-12 lg:!pt-14">
         <Container>
-          <div className="flex items-baseline justify-between gap-4">
-            <h2 id="all-events-heading" className="text-[1.375rem] font-extrabold text-navy sm:text-2xl">
-              More Events &amp; Moments
-            </h2>
-            <a
-              href="#all-events"
-              className="flex shrink-0 items-center gap-1.5 text-[0.875rem] font-semibold text-brand hover:underline"
-            >
-              View All Events
-              <Icon name="arrowRight" className="h-4 w-4" />
-            </a>
-          </div>
+          <h2 id="all-events-heading" className="text-[1.375rem] font-extrabold text-navy sm:text-2xl">
+            More Events &amp; Moments
+          </h2>
 
           <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {galleryPhotos.map((photo) => {
@@ -190,7 +156,7 @@ export default function EventsPage() {
                           {badgeLabel}
                         </span>
                         <a
-                          href="#"
+                          href={`/events/${photo.slug}`}
                           className="flex items-center gap-1 text-[0.8125rem] font-semibold text-brand hover:underline"
                         >
                           View Album

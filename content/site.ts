@@ -50,7 +50,25 @@ export const nav = [
   { label: "prephasz", href: "/#prephasz", page: "/prephasz" },
   { label: "Global Finance Program", href: "/#bcom-acca", page: "/bcom-acca" },
   { label: "Why ZSkillup", href: "/#education-to-career", page: "/why-zskillup" },
-  { label: "Insights", href: "/insights", page: "/insights" },
+  {
+    label: "Insights",
+    href: "/blog",
+    page: "/blog",
+    children: [
+      {
+        label: "Events",
+        href: "/events",
+        description: "Webinars, workshops and campus visits",
+        icon: "calendar",
+      },
+      {
+        label: "Blog",
+        href: "/blog",
+        description: "Career tips, industry trends and guides",
+        icon: "file",
+      },
+    ],
+  },
   { label: "About", href: "/#about", page: "/about" },
 ] as const;
 
@@ -76,7 +94,7 @@ export const footerColumns = [
       { label: "About ZSkillup", href: "/#about" },
       { label: "Our Partners", href: "/#partners" },
       { label: "ZSkillup in Action", href: "/#in-action" },
-      { label: "Insights", href: "/insights" },
+      { label: "Insights", href: "/blog" },
     ],
   },
   {

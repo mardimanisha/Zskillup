@@ -46,7 +46,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const nextConfig: NextConfig = {
   output: "export",
   basePath,
-  // Trailing slashes make GitHub Pages resolve /insights -> /insights/index.html.
+  // Trailing slashes make GitHub Pages resolve /blog -> /blog/index.html.
   trailingSlash: true,
   images: {
     unoptimized: true,
