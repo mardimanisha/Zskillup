@@ -190,10 +190,10 @@ export const chooseRoute: {
       vertical: "commerce",
       kicker: "Real opportunities",
       eyebrow: "For Global Finance Careers",
-      brand: "Global Finance & AI Professional Program",
+      brand: "Global Finance & AI",
       title: "Future-Ready.\nAI-Enabled.\nGlobally Employable.",
-      body: "Global Finance & AI Professional Program. Build practical finance and AI skills for the global workplace.",
-      features: ["B.Com + professional program", "Finance and AI skills", "Global career opportunities"],
+      body: "The Global Finance & AI Professional Program builds practical finance, AI, and workplace skills for global career opportunities.",
+      features: ["Practical finance knowledge", "AI-enabled workplace skills", "Global career preparation"],
       // The Button renders its own trailing arrow, so "Explore the Program →" is
       // the visible result of this label - a literal "→" here would double it.
       cta: { label: "Explore the Program", href: "#bcom-acca" },
