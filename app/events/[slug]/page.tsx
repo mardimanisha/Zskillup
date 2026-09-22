@@ -6,6 +6,7 @@ import { asset } from "@/lib/asset";
 import { featuredEvents, galleryPhotos, badgeColors, badgeLabels } from "@/content/events";
 import { Icon } from "@/components/ui/Icon";
 import { Container, Section } from "@/components/ui/Section";
+import { EventPhotoGrid } from "@/components/ui/EventPhotoGrid";
 
 const allEvents = [...featuredEvents, ...galleryPhotos];
 
@@ -86,79 +87,37 @@ export default async function EventDetailPage({ params }: Props) {
       </Section>
 
       {/* Articles + images */}
-      <Section tone="white">
+      <Section tone="white" className="!py-10 sm:!py-12 lg:!py-14">
         <Container>
-          {/* Article blocks — alternating image side */}
+          {/* Article text — side by side, left-aligned */}
           {event.articles && event.articles.length > 0 && (
-            <div className="mt-14 space-y-16">
-              {event.articles.map((article, i) => (
-                <div
-                  key={article.heading}
-                  className={`flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-14 ${
-                    i % 2 === 1 ? "lg:flex-row-reverse" : ""
-                  }`}
-                >
-                  {/* Text */}
-                  <div className="flex-1">
-                    <h2 className="text-[1.375rem] font-extrabold leading-snug text-navy sm:text-[1.625rem]">
-                      {article.heading}
-                    </h2>
-                    <p className="mt-4 text-[1rem] leading-relaxed text-body">{article.body}</p>
-                  </div>
-                  {/* Image */}
-                  {article.image && (
-                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl lg:w-[45%] lg:flex-none">
-                      <Image
-                        src={asset(article.image)}
-                        alt={article.imageAlt ?? ""}
-                        fill
-                        sizes="(min-width: 1024px) 45vw, 100vw"
-                        className="object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
+            <div className="grid gap-10 sm:grid-cols-2 sm:gap-14">
+              {event.articles.map((article) => (
+                <div key={article.heading}>
+                  <h2 className="text-[1.375rem] font-extrabold leading-snug text-navy sm:text-[1.625rem]">
+                    {article.heading}
+                  </h2>
+                  <p className="mt-4 text-[1rem] leading-relaxed text-body">{article.body}</p>
                 </div>
               ))}
             </div>
           )}
 
-          {/* Photo gallery */}
-          {event.photos && event.photos.length > 0 && (
-            <div className="mt-16">
-              <h2 className="text-[1.125rem] font-extrabold text-navy">More from this event</h2>
-              <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {event.photos.map((src, i) => (
-                  <div
-                    key={src + i}
-                    className="relative aspect-[4/3] overflow-hidden rounded-xl"
-                  >
-                    <Image
-                      src={asset(src)}
-                      alt=""
-                      fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-300 hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 flex justify-center">
-                <button
-                  type="button"
-                  className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-navy/20 px-7 py-3 text-[0.9375rem] font-semibold text-navy transition-colors duration-300 hover:border-transparent hover:text-white"
-                >
-                  <span className="absolute inset-0 bg-gradient-stat-highlight opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <span className="relative">Load More Images</span>
-                  <Icon
-                    name="arrowDown"
-                    className="relative h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5"
-                  />
-                </button>
-              </div>
-            </div>
-          )}
+          {/* Photo gallery — article images + additional event photos, all together */}
+          {(() => {
+            const articlePhotos = (event.articles ?? [])
+              .filter((a) => a.image)
+              .map((a) => ({ src: a.image!, alt: a.imageAlt ?? "", caption: a.heading }));
+            const extraPhotos = (event.photos ?? []).map((src) => ({ src, alt: "" }));
+            const allPhotos = [...articlePhotos, ...extraPhotos];
+            return (
+              allPhotos.length > 0 && (
+                <div className="mt-10">
+                  <EventPhotoGrid photos={allPhotos} />
+                </div>
+              )
+            );
+          })()}
         </Container>
       </Section>
     </>

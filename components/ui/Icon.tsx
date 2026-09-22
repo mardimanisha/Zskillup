@@ -46,6 +46,8 @@ export type IconName =
   | "check"
   | "linkedin"
   | "xTwitter"
+  | "instagram"
+  | "youtube"
   | "phone"
   | "mail"
   | "pin"
@@ -265,6 +267,19 @@ const paths: Record<IconName, React.ReactNode> = {
       fill="currentColor"
       stroke="none"
     />
+  ),
+  instagram: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none" />
+    </>
+  ),
+  youtube: (
+    <>
+      <rect x="2.5" y="5.5" width="19" height="13" rx="3.5" />
+      <path d="M10.3 9.1v5.8l5.1-2.9-5.1-2.9Z" fill="currentColor" stroke="none" />
+    </>
   ),
   phone: (
     <path d="M6.2 3.8h3l1.5 3.8-1.9 1.4a11.5 11.5 0 0 0 5.2 5.2l1.4-1.9 3.8 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.2 6a2 2 0 0 1 2-2.2Z" />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,12 +28,36 @@ function formatDate(iso: string) {
   });
 }
 
+function slugifyHeading(heading: string) {
+  return heading
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+/** First sentence of each section's body, used as a short key-highlight bullet. */
+function firstSentence(body: string) {
+  const match = body.match(/^[^.!?]*[.!?]/);
+  return (match ? match[0] : body).trim();
+}
+
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
   if (!post) notFound();
 
   const pillStyle = categoryColors[post.category] ?? "bg-brand-soft text-brand";
+
+  const sections = post.sections ?? [];
+  const toc = sections.map((s) => ({ heading: s.heading, id: slugifyHeading(s.heading) }));
+  const keyHighlights = sections.map((s) => firstSentence(s.body));
+
+  /* A single horizontal row of 2-3 images, pooled from the sections' own
+     images, placed once part-way through the article instead of on every section. */
+  const imageRow = sections
+    .filter((s) => s.image)
+    .slice(0, 3)
+    .map((s) => ({ src: s.image!, alt: s.imageAlt ?? s.heading }));
 
   /* Related posts — same category, exclude current */
   const related = blogPosts
@@ -92,42 +117,96 @@ export default async function BlogPostPage({ params }: Props) {
       {/* Article body */}
       <Section tone="white">
         <Container>
-          {/* Intro excerpt */}
-          <p className="mx-auto max-w-2xl text-center text-[1.0625rem] leading-relaxed text-body">
-            {post.excerpt}
-          </p>
+          <div className="mx-auto max-w-3xl">
+            {/* Breadcrumb */}
+            <nav aria-label="Breadcrumb" className="mb-5 flex flex-wrap items-center gap-1.5 text-[0.8125rem] text-muted">
+              <Link href="/" className="hover:text-navy">
+                Home
+              </Link>
+              <span>&gt;</span>
+              <Link href="/blog" className="hover:text-navy">
+                Blog
+              </Link>
+              <span>&gt;</span>
+              <span className="font-semibold text-navy">{post.categoryLabel}</span>
+            </nav>
 
-          {/* Content sections — alternating layout like events page */}
-          {post.sections && post.sections.length > 0 && (
-            <div className="mt-14 space-y-16">
-              {post.sections.map((section, i) => (
-                <div
-                  key={section.heading}
-                  className={`flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-14 ${
-                    i % 2 === 1 ? "lg:flex-row-reverse" : ""
-                  }`}
-                >
-                  {/* Text */}
-                  <div className="flex-1">
+            {(toc.length > 0 || keyHighlights.length > 0) && (
+              <div className="grid gap-5 sm:grid-cols-2">
+                {/* Table of contents */}
+                {toc.length > 0 && (
+                  <div className="rounded-2xl border border-line bg-cloud/60 p-5">
+                    <h2 className="text-[0.9375rem] font-extrabold text-navy">Table of Contents</h2>
+                    <ul className="mt-3 space-y-2">
+                      {toc.map((item) => (
+                        <li key={item.id}>
+                          <a
+                            href={`#${item.id}`}
+                            className="text-[0.875rem] text-brand transition-colors hover:text-brand-deep hover:underline"
+                          >
+                            {item.heading}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Key highlights */}
+                {keyHighlights.length > 0 && (
+                  <div className="rounded-2xl border border-line bg-cloud/60 p-5">
+                    <h2 className="text-[0.9375rem] font-extrabold text-navy">Key Highlights</h2>
+                    <ul className="mt-3 space-y-2">
+                      {keyHighlights.map((point, i) => (
+                        <li key={i} className="flex gap-2 text-[0.875rem] leading-relaxed text-body">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Intro excerpt */}
+            <p className="mt-8 text-[1.0625rem] leading-relaxed text-body">{post.excerpt}</p>
+          </div>
+
+          {/* Content sections — article text, then a full-width image row, repeating */}
+          {sections.length > 0 && (
+            <div className="mx-auto mt-14 max-w-3xl space-y-12">
+              {sections.map((section, i) => (
+                <Fragment key={section.heading}>
+                  <div id={slugifyHeading(section.heading)} className="scroll-mt-24">
                     <h2 className="text-[1.375rem] font-extrabold leading-snug text-navy sm:text-[1.625rem]">
                       {section.heading}
                     </h2>
-                    <p className="mt-4 text-[1rem] leading-relaxed text-body">{section.body}</p>
+                    {section.body.split("\n\n").map((paragraph, j) => (
+                      <p key={j} className="mt-4 text-[1rem] leading-relaxed text-body">
+                        {paragraph}
+                      </p>
+                    ))}
                   </div>
-                  {/* Image */}
-                  {section.image && (
-                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl lg:w-[45%] lg:flex-none">
-                      <Image
-                        src={section.image}
-                        alt={section.imageAlt ?? ""}
-                        fill
-                        sizes="(min-width: 1024px) 45vw, 100vw"
-                        className="object-cover"
-                        loading="lazy"
-                      />
+
+                  {/* One horizontal row of images, part-way through the article */}
+                  {i === 0 && imageRow.length > 0 && (
+                    <div className="grid gap-4 sm:grid-cols-3">
+                      {imageRow.map((img) => (
+                        <div key={img.src} className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
+                          <Image
+                            src={img.src}
+                            alt={img.alt}
+                            fill
+                            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                            className="object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                      ))}
                     </div>
                   )}
-                </div>
+                </Fragment>
               ))}
             </div>
           )}

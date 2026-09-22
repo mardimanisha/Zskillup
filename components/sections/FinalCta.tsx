@@ -53,17 +53,11 @@ export function FinalCta() {
                   {contact.email}
                 </a>
               </li>
-              <li className="flex items-start gap-4 text-[0.9375rem] text-body">
+              <li className="flex items-center gap-4 text-[0.9375rem] text-body">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-cloud text-brand">
                   <Icon name="pin" className="h-[1.05rem] w-[1.05rem]" />
                 </span>
-                <span className="pt-2.5">
-                  {contact.addressLines.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
-                </span>
+                {contact.locations}
               </li>
             </ul>
           </div>

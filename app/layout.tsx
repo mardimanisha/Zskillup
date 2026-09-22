@@ -3,6 +3,7 @@ import { Caveat, Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/content/site";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { FloatingEnquiryButtons } from "@/components/sections/FloatingEnquiryButtons";
 import "./globals.css";
 
 /**
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <SiteFooter />
+        <FloatingEnquiryButtons />
       </body>
     </html>
   );

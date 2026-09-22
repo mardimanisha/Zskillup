@@ -120,6 +120,10 @@ export const featuredEvents: readonly Photo[] = [
       "/images/events/hands-on-learning-lab.jpg",
       "/images/events/expert-talk-series.jpg",
       "/images/events/group-activity-workshop.jpg",
+      "/images/events/institutional-collaboration.jpg",
+      "/images/events/certificate-distribution.jpg",
+      "/images/events/student-community-cohort.jpg",
+      "/images/events/acca-career-workshop-session.jpg",
     ],
   },
   {
@@ -145,6 +149,13 @@ export const featuredEvents: readonly Photo[] = [
         imageAlt: "ZSkillup team with institution representatives",
       },
     ],
+    photos: [
+      "/images/events/certificate-distribution.jpg",
+      "/images/events/hands-on-learning-lab.jpg",
+      "/images/events/expert-talk-series.jpg",
+      "/images/events/acca-career-workshop-session.jpg",
+      "/images/events/industry-expert-session.jpg",
+    ],
   },
   {
     src: "/images/events/acca-career-workshop-session.jpg",
@@ -169,6 +180,13 @@ export const featuredEvents: readonly Photo[] = [
         imageAlt: "Students engaging in a hands-on workshop session",
       },
     ],
+    photos: [
+      "/images/events/group-activity-workshop.jpg",
+      "/images/events/institutional-collaboration.jpg",
+      "/images/events/certificate-distribution.jpg",
+      "/images/events/student-community-cohort.jpg",
+      "/images/events/interactive-workshop.jpg",
+    ],
   },
   {
     src: "/images/events/certificate-distribution.jpg",
@@ -192,6 +210,13 @@ export const featuredEvents: readonly Photo[] = [
         image: "/images/events/student-community-cohort.jpg",
         imageAlt: "A large cohort of students gathered at a ZSkillup campus program",
       },
+    ],
+    photos: [
+      "/images/events/expert-talk-series.jpg",
+      "/images/events/institutional-collaboration.jpg",
+      "/images/events/hands-on-learning-lab.jpg",
+      "/images/events/acca-career-workshop-session.jpg",
+      "/images/events/interactive-workshop.jpg",
     ],
   },
 ];
@@ -220,6 +245,13 @@ export const galleryPhotos: readonly Photo[] = [
         imageAlt: "A facilitator writing ideas on a whiteboard during an interactive workshop",
       },
     ],
+    photos: [
+      "/images/events/group-activity-workshop.jpg",
+      "/images/events/expert-talk-series.jpg",
+      "/images/events/student-community-cohort.jpg",
+      "/images/events/institutional-collaboration.jpg",
+      "/images/events/certificate-distribution.jpg",
+    ],
   },
   {
     src: "/images/events/student-community-cohort.jpg",
@@ -247,6 +279,10 @@ export const galleryPhotos: readonly Photo[] = [
       "/images/events/group-activity-workshop.jpg",
       "/images/events/institutional-collaboration.jpg",
       "/images/events/certificate-distribution.jpg",
+      "/images/events/student-community-cohort.jpg",
+      "/images/events/hands-on-learning-lab.jpg",
+      "/images/events/expert-talk-series.jpg",
+      "/images/events/acca-career-workshop-session.jpg",
     ],
   },
   {
@@ -271,6 +307,13 @@ export const galleryPhotos: readonly Photo[] = [
         imageAlt: "A speaker presenting to an engaged audience",
       },
     ],
+    photos: [
+      "/images/events/hands-on-learning-lab.jpg",
+      "/images/events/institutional-collaboration.jpg",
+      "/images/events/student-community-cohort.jpg",
+      "/images/events/certificate-distribution.jpg",
+      "/images/events/interactive-workshop.jpg",
+    ],
   },
   {
     src: "/images/events/expert-talk-series.jpg",
@@ -293,6 +336,13 @@ export const galleryPhotos: readonly Photo[] = [
         image: "/images/events/acca-career-workshop-session.jpg",
         imageAlt: "A speaker presenting career opportunities to students",
       },
+    ],
+    photos: [
+      "/images/events/expert-talk-series.jpg",
+      "/images/events/group-activity-workshop.jpg",
+      "/images/events/hands-on-learning-lab.jpg",
+      "/images/events/institutional-collaboration.jpg",
+      "/images/events/certificate-distribution.jpg",
     ],
   },
   {
@@ -317,6 +367,13 @@ export const galleryPhotos: readonly Photo[] = [
         imageAlt: "ZSkillup team with institution representatives",
       },
     ],
+    photos: [
+      "/images/events/certificate-distribution.jpg",
+      "/images/events/group-activity-workshop.jpg",
+      "/images/events/expert-talk-series.jpg",
+      "/images/events/hands-on-learning-lab.jpg",
+      "/images/events/acca-career-workshop-session.jpg",
+    ],
   },
   {
     src: "/images/events/group-activity-workshop.jpg",
@@ -339,6 +396,13 @@ export const galleryPhotos: readonly Photo[] = [
         image: "/images/events/hands-on-learning-lab.jpg",
         imageAlt: "Students engaging in a hands-on workshop session",
       },
+    ],
+    photos: [
+      "/images/events/group-activity-workshop.jpg",
+      "/images/events/institutional-collaboration.jpg",
+      "/images/events/student-community-cohort.jpg",
+      "/images/events/expert-talk-series.jpg",
+      "/images/events/certificate-distribution.jpg",
     ],
   },
   {
@@ -363,6 +427,13 @@ export const galleryPhotos: readonly Photo[] = [
         imageAlt: "Students holding their programme completion certificates",
       },
     ],
+    photos: [
+      "/images/events/institutional-collaboration.jpg",
+      "/images/events/group-activity-workshop.jpg",
+      "/images/events/hands-on-learning-lab.jpg",
+      "/images/events/expert-talk-series.jpg",
+      "/images/events/acca-career-workshop-session.jpg",
+    ],
   },
   {
     src: "/images/events/interactive-workshop.jpg",
@@ -385,6 +456,13 @@ export const galleryPhotos: readonly Photo[] = [
         image: "/images/events/expert-talk-series.jpg",
         imageAlt: "A speaker presenting to an engaged audience",
       },
+    ],
+    photos: [
+      "/images/events/interactive-workshop.jpg",
+      "/images/events/hands-on-learning-lab.jpg",
+      "/images/events/student-community-cohort.jpg",
+      "/images/events/institutional-collaboration.jpg",
+      "/images/events/certificate-distribution.jpg",
     ],
   },
 ];

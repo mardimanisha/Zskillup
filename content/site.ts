@@ -20,20 +20,18 @@ export const site = {
 } as const;
 
 export const contact = {
-  phone: "+91 80500 70534",
-  phoneHref: "tel:+918050070534",
-  email: "hello@zskillup.com", // VERIFY: live site lists Lokesh@zskillup.com / Sneha.jadhav@zskillup.com
-  addressLines: [
-    "WeWork Princeville, Golf Link Software Park",
-    "Challaghatta Village, Domlur",
-    "Bengaluru, Karnataka 560071",
-  ],
+  locations: "Bangalore | Pune | Jaipur",
+  phone: "+91 9153005252",
+  phoneHref: "tel:+919153005252",
+  email: "communications@zskillup.com",
+  website: "www.zskillup.com",
+  websiteHref: "https://www.zskillup.com",
 } as const;
 
 export const social = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/zskillup" },
-  { label: "Instagram", href: "https://www.instagram.com/zskillup" },
-  { label: "YouTube", href: "https://www.youtube.com/@zskillup" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/zskillup", icon: "linkedin" },
+  { label: "Instagram", href: "https://www.instagram.com/zskillup", icon: "instagram" },
+  { label: "YouTube", href: "https://www.youtube.com/@zskillup", icon: "youtube" },
 ] as const;
 
 /**
@@ -80,21 +78,17 @@ export const headerCta = {
 
 export const footerColumns = [
   {
-    title: "What we do",
+    title: "Quick Links",
     links: [
       { label: "ZSkillup for Institutions", href: "/#institutions" },
       { label: "prephasz", href: "/#prephasz" },
       { label: "Global Finance Program", href: "/#bcom-acca" },
       { label: "The Education-to-Career Path", href: "/#education-to-career" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
       { label: "About ZSkillup", href: "/#about" },
       { label: "Our Partners", href: "/#partners" },
       { label: "ZSkillup in Action", href: "/#in-action" },
       { label: "Insights", href: "/blog" },
+      { label: "FAQs", href: "/#faqs" },
     ],
   },
   {
@@ -103,7 +97,6 @@ export const footerColumns = [
       { label: "Partner With Us", href: "/#partner-with-us" },
       { label: "Talk to a Career Advisor", href: "/#partner-with-us" },
       { label: "Request a Customised Program", href: "/#partner-with-us" },
-      { label: "FAQs", href: "/#faqs" },
     ],
   },
 ] as const;

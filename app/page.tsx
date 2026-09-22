@@ -8,7 +8,6 @@ import { ChooseRoute } from "@/components/sections/ChooseRoute";
 import { Institutions } from "@/components/sections/Institutions";
 import { Prephasz } from "@/components/sections/Prephasz";
 import { BcomAcca } from "@/components/sections/BcomAcca";
-import { EducationPath } from "@/components/sections/EducationPath";
 import { Partners } from "@/components/sections/Partners";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { InAction } from "@/components/sections/InAction";
@@ -49,7 +48,6 @@ export default function HomePage() {
       <Institutions />
       <Prephasz />
       <BcomAcca />
-      <EducationPath />
       <Partners />
       <Testimonials />
       <InAction />
@@ -86,14 +84,6 @@ function StructuredData() {
     description: site.description,
     telephone: contact.phone,
     email: contact.email,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: contact.addressLines[0],
-      addressLocality: "Bengaluru",
-      addressRegion: "Karnataka",
-      postalCode: "560071",
-      addressCountry: "IN",
-    },
   };
 
   const faqPage = {

@@ -69,9 +69,9 @@ function InsightsHero() {
 
   return (
     <div className="border-b border-line bg-gradient-to-b from-cloud to-white">
-      <Container className="py-8 sm:py-10">
+      <Container className="py-6 sm:py-8">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-1.5 text-[0.8125rem] text-muted">
+        <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-[0.8125rem] text-muted">
           <Link href="/" className="hover:text-navy">
             Home
           </Link>
@@ -79,7 +79,7 @@ function InsightsHero() {
           <span className="font-semibold text-navy">Blog</span>
         </nav>
 
-        <h1 className="mb-6 text-[2rem] font-extrabold tracking-tight text-navy sm:text-[2.5rem]">
+        <h1 className="mb-3 text-[1.5rem] font-extrabold tracking-tight text-navy sm:text-[1.875rem]">
           ZSkillup Blogs
         </h1>
 
@@ -103,8 +103,8 @@ function InsightsHero() {
               style={{ transform: `translateX(-${active * 100}%)` }}
             >
               {slides.map((post) => (
-                <div key={post.slug} className="grid w-full shrink-0 gap-6 p-4 sm:grid-cols-2 sm:gap-8 sm:p-5">
-                  <div className="relative h-[220px] w-full overflow-hidden rounded-xl bg-cloud sm:h-[260px]">
+                <div key={post.slug} className="grid w-full shrink-0 gap-5 p-4 sm:grid-cols-2 sm:items-center sm:gap-6 sm:p-4">
+                  <div className="relative h-[200px] w-full overflow-hidden rounded-xl bg-cloud sm:h-[200px]">
                     {post.coverImage && (
                       <Image
                         src={post.coverImage}
@@ -117,20 +117,20 @@ function InsightsHero() {
                     )}
                   </div>
 
-                  <div className="flex flex-col justify-center">
+                  <div className="flex flex-col justify-center gap-1.5">
                     <p className="text-[0.8125rem] text-muted">
                       {post.categoryLabel} &nbsp;|&nbsp; {formatDate(post.date)} &nbsp;|&nbsp; {post.readTime} min read
                     </p>
-                    <Link href={`/blog/${post.slug}`} className="group mt-2">
-                      <h2 className="text-[1.5rem] font-extrabold leading-[1.25] text-navy transition-colors group-hover:text-brand sm:text-[1.75rem]">
+                    <Link href={`/blog/${post.slug}`} className="group">
+                      <h2 className="text-[1.375rem] font-extrabold leading-[1.25] text-navy transition-colors group-hover:text-brand sm:text-[1.625rem]">
                         {post.title}
                       </h2>
                     </Link>
-                    <p className="mt-3 line-clamp-3 text-[0.9375rem] leading-relaxed text-body">
+                    <p className="line-clamp-2 text-[0.9375rem] leading-relaxed text-body">
                       {post.excerpt}
                     </p>
 
-                    <div className="mt-5 flex items-center gap-3">
+                    <div className="mt-1 flex items-center gap-3">
                       <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand/10 text-[0.75rem] font-bold text-brand">
                         {post.author.name
                           .split(" ")
@@ -228,13 +228,13 @@ export default function InsightsPage() {
     <>
       <InsightsHero />
 
-      <div className="bg-white py-14 sm:py-16">
+      <div className="bg-white py-8 sm:py-10">
         <Container>
-          <h2 className="text-[1.5rem] font-extrabold text-navy sm:text-[1.75rem]">
+          <h2 className="text-[1.25rem] font-extrabold text-navy sm:text-[1.5rem]">
             Discover Blogs by <span className="text-brand">Categories</span>
           </h2>
 
-          <div className="mt-8 flex flex-col gap-8 lg:flex-row">
+          <div className="mt-5 flex flex-col gap-6 lg:flex-row">
             {/* Sidebar */}
             <aside className="flex shrink-0 flex-col gap-2.5 lg:w-64">
               <CategorySidebarButton
