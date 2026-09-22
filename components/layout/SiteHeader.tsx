@@ -145,12 +145,24 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Button href={headerCta.href} variant="primary" size="sm" className="hidden sm:inline-flex">
-              {headerCta.label}
-            </Button>
+            {/* Mirrors the logo's own alignment fix (see the transform note on
+                the logo <Link> above), but on the right edge: Container
+                recentres past its 1240px cap, growing this side's margin at
+                the same rate the logo's growing left margin gets cancelled
+                on its side - so without this, the CTA/search drift away from
+                the Hero's right edge (which is uncapped, see pageGutter in
+                Hero.tsx) as the viewport widens past 1240px. The flat -16px
+                cancels the constant gap between Container's own px padding
+                and the Hero's effective right padding (pr minus its own
+                16px nudge), which holds at every width below 1240px too. */}
+            <div className="flex items-center gap-2 [transform:translateX(calc(max(0px,(100vw_-_1240px)/2)_-_16px))]">
+              <Button href={headerCta.href} variant="primary" size="sm" className="hidden sm:inline-flex">
+                {headerCta.label}
+              </Button>
 
-            <div className="hidden sm:block">
-              <SiteSearch />
+              <div className="hidden sm:block">
+                <SiteSearch />
+              </div>
             </div>
 
             <button

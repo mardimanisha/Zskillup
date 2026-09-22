@@ -25,8 +25,24 @@ import { VideoDialog } from "@/components/ui/VideoDialog";
  * (B.Com + ACCA) - the brief caps them and the updated designs dropped the rest.
  */
 
-/** The hero's horizontal gutter, shared by its text and its cards row (flat, uncapped - see the note in Hero). */
-const pageGutter = "w-full px-5 sm:px-8";
+/** The hero's horizontal gutter, shared by its text and its cards row (flat, uncapped - see the note in Hero).
+ *
+ * `translate-x-4` (16px) is a deliberate nudge, not part of the flat-gutter
+ * system described below: the navbar's logo artwork (zskillup-logo.png) has
+ * ~16px of transparent padding baked into its canvas before the visible
+ * mark starts, so the logo's own box edge (which this gutter otherwise
+ * matches exactly) sits to the left of where the mark visibly begins. Rather
+ * than touching the shared logo asset/component, the hero content is nudged
+ * right by that same amount so it lines up with the logo as it's actually
+ * rendered.
+ *
+ * Because the translate shifts the whole padded box right without widening
+ * it, a plain symmetric `px` leaves the right edge 2x the nudge (32px)
+ * closer to the viewport edge than the left edge sits from it - the uneven
+ * left/right spacing this fixes. The right padding is bumped by that same
+ * 32px (2x the 16px nudge) so the visual gap on the right matches the left
+ * again once the translate is applied. */
+const pageGutter = "w-full pl-5 pr-[3.25rem] sm:pl-8 sm:pr-16 translate-x-4";
 
 const cardIcon: Record<Vertical, IconName> = {
   institutions: "graduation",
@@ -437,17 +453,17 @@ function HeroCard({ card }: { card: (typeof heroCards)[number] }) {
               primary/secondary buttons' own measured height at each tier
               (checked in-browser, not guessed) so all three land on the same
               top/bottom edge via the row's existing `items-center` - the
-              circle (still 28px, untouched) simply centers within the
-              now-matched box instead of dictating it. It has NO left padding
-              at any tier (`!pl-0`, this button only - the sibling buttons
-              keep theirs): the circle sits right in the rounded end cap. Its
-              right padding is its own original value plus the same `--hx`
-              as the buttons beside it. */}
+              circle (back to its original 28px) simply centers within the
+              now-matched box instead of dictating it. Its left padding is
+              uniformly just the row's own fluid `--hx` at every tier - as
+              close to the pill's own rounded end cap as it can sit without
+              the circle's border touching the pill's - while the right side
+              keeps the room the label's text needs. */}
           <VideoDialog
             video={video}
             label={card.video.label}
             variant="pill"
-            className="!h-[29px] !gap-[2px] !py-0 !pl-0 !pr-[calc(4px_+_var(--hx))] !text-[0.625rem] min-[420px]:!h-9 min-[420px]:!gap-1 min-[420px]:!pr-[calc(12px_+_var(--hx))] min-[420px]:!text-[0.6875rem] min-[640px]:!h-[50px] min-[640px]:!gap-2.5 min-[640px]:!py-[14px] min-[640px]:!pr-[calc(18px_+_var(--hx))] min-[640px]:!text-[0.9375rem] min-[900px]:!h-14 min-[900px]:!gap-3 min-[900px]:!py-4 min-[900px]:!pr-[calc(24px_+_var(--hx))] min-[900px]:!text-base xl:!h-8 xl:!gap-[2px] xl:!py-0 xl:!pr-[calc(8px_+_var(--hx))] xl:!text-[0.6875rem]"
+            className="!h-[29px] !gap-[2px] !py-0 !pl-[var(--hx)] !pr-[calc(4px_+_var(--hx))] !text-[0.625rem] min-[420px]:!h-9 min-[420px]:!gap-1 min-[420px]:!pl-[var(--hx)] min-[420px]:!pr-[calc(12px_+_var(--hx))] min-[420px]:!text-[0.6875rem] min-[640px]:!h-[50px] min-[640px]:!gap-2.5 min-[640px]:!py-[14px] min-[640px]:!pl-[var(--hx)] min-[640px]:!pr-[calc(18px_+_var(--hx))] min-[640px]:!text-[0.9375rem] min-[900px]:!h-14 min-[900px]:!gap-3 min-[900px]:!py-4 min-[900px]:!pl-[var(--hx)] min-[900px]:!pr-[calc(24px_+_var(--hx))] min-[900px]:!text-base xl:!h-8 xl:!gap-[2px] xl:!py-0 xl:!pl-[var(--hx)] xl:!pr-[calc(8px_+_var(--hx))] xl:!text-[0.6875rem]"
           />
         </div>
       </div>
