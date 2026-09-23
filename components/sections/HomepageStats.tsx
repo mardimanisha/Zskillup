@@ -184,7 +184,7 @@ export function HomepageStats() {
   }, []);
 
   return (
-    <section ref={sectionRef} aria-label="ZSkillup at a glance" className="bg-white py-14 sm:py-16 lg:py-20">
+    <section ref={sectionRef} aria-label="ZSkillup at a glance" className="bg-white pt-4 pb-10 sm:pt-6 sm:pb-12 lg:pt-8 lg:pb-14">
       <div className="mx-auto w-full max-w-[1450px] px-5 sm:px-8">
         <div className="mx-auto max-w-[42rem] text-center">
           <p className="flex items-center justify-center gap-3 text-[0.75rem] font-bold tracking-[0.2em] text-brand uppercase">

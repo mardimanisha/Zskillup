@@ -67,6 +67,24 @@ export function SiteFooter() {
             <p className="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-white/65">
               {site.description}
             </p>
+
+            <ul className="mt-6 flex items-center gap-3">
+              {social.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label={item.label}
+                    className={`flex h-9 w-9 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85 ${socialBg[item.icon]}`}
+                  >
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+                      {socialGlyphs[item.icon]}
+                    </svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>
@@ -121,28 +139,11 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-5 border-t border-white/12 pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 border-t border-white/12 pt-8">
           <p className="text-sm text-white/50">
             {/* legalName already ends in "Ltd." - don't add a second full stop. */}
             &copy; {year} {site.legalName} All rights reserved.
           </p>
-          <ul className="flex items-center gap-3">
-            {social.map((item) => (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  aria-label={item.label}
-                  className={`flex h-9 w-9 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85 ${socialBg[item.icon]}`}
-                >
-                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
-                    {socialGlyphs[item.icon]}
-                  </svg>
-                </a>
-              </li>
-            ))}
-          </ul>
         </div>
       </Container>
     </footer>

@@ -48,7 +48,7 @@ export function Section({
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={`scroll-mt-24 py-20 sm:py-24 lg:py-28 ${tones[tone]} ${className}`}
+      className={`scroll-mt-24 py-10 sm:py-12 lg:py-14 ${tones[tone]} ${className}`}
     >
       {children}
     </section>

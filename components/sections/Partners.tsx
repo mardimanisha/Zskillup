@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { asset } from "@/lib/asset";
 import { partners, partnerTabs, type Partner } from "@/content/partners";
 import { partnerStats, publishable } from "@/content/stats";
-import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Container, Eyebrow, Heading, Lede, Section } from "@/components/ui/Section";
 
@@ -83,12 +82,6 @@ export function Partners() {
                 ))}
               </dl>
             ) : null}
-
-            <div className="mt-9">
-              <Button href={partners.explore.href} variant="gold" size="lg">
-                {partners.explore.label}
-              </Button>
-            </div>
           </div>
 
           <div className="min-w-0 lg:col-span-8">
