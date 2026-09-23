@@ -31,7 +31,7 @@ const socialGlyphs: Record<"linkedin" | "instagram" | "youtube", React.ReactNode
 
 function FooterLinkList({ links }: { links: ReadonlyArray<{ label: string; href: string }> }) {
   return (
-    <ul className="mt-5 space-y-3">
+    <ul className="mt-3 space-y-2">
       {links.map((link) => (
         <li key={link.label}>
           <Link
@@ -58,17 +58,17 @@ export function SiteFooter() {
   return (
     <footer className="bg-navy text-white">
       <div aria-hidden="true" className="h-1 bg-gradient-brand" />
-      <Container className="py-16 lg:py-20">
-        <div className="grid gap-x-10 gap-y-12 lg:grid-cols-[1.1fr_0.85fr_0.85fr_1fr]">
+      <Container className="py-10 lg:py-14">
+        <div className="grid gap-x-10 gap-y-8 lg:grid-cols-[1.1fr_0.85fr_0.85fr_1fr]">
           <div>
             <Link href="/" aria-label="ZSkillup home" className="flow-root w-fit">
               <ZSkillupLogoLight className="[--logo-h:3.25rem] sm:[--logo-h:3.75rem]" />
             </Link>
-            <p className="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-white/65">
+            <p className="mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-white/65">
               {site.description}
             </p>
 
-            <ul className="mt-6 flex items-center gap-3">
+            <ul className="mt-4 flex items-center gap-3">
               {social.map((item) => (
                 <li key={item.label}>
                   <a
@@ -107,7 +107,7 @@ export function SiteFooter() {
             </h2>
             <FooterLinkList links={getInTouch} />
 
-            <address className="mt-7 space-y-3 text-[0.9375rem] not-italic text-white/65">
+            <address className="mt-5 space-y-2 text-[0.9375rem] not-italic text-white/65">
               <p className="flex items-center gap-3">
                 <Icon name="pin" className="h-4 w-4 shrink-0 text-white/40" />
                 {contact.locations}
@@ -139,7 +139,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-14 border-t border-white/12 pt-8">
+        <div className="mt-8 border-t border-white/12 pt-6">
           <p className="text-sm text-white/50">
             {/* legalName already ends in "Ltd." - don't add a second full stop. */}
             &copy; {year} {site.legalName} All rights reserved.

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Container } from "@/components/ui/Section";
 import {
+  allCategories,
   blogPosts,
   categoryColors,
   type BlogCategory,
@@ -214,11 +215,6 @@ function CategorySidebarButton({
 export default function InsightsPage() {
   const [activeFilter, setActiveFilter] = useState<BlogCategory | "all">("all");
 
-  const categories = Array.from(new Set(blogPosts.map((p) => p.category))).map((value) => ({
-    value,
-    label: blogPosts.find((p) => p.category === value)!.categoryLabel,
-  }));
-
   const filteredPosts =
     activeFilter === "all"
       ? blogPosts
@@ -242,7 +238,7 @@ export default function InsightsPage() {
                 active={activeFilter === "all"}
                 onClick={() => setActiveFilter("all")}
               />
-              {categories.map((c) => (
+              {allCategories.map((c) => (
                 <CategorySidebarButton
                   key={c.value}
                   label={c.label}

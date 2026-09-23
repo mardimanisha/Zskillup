@@ -65,8 +65,8 @@ export function InAction() {
         <path d="M376,58 C418,112 428,202 398,284 C368,366 288,418 198,410 C108,402 28,334 8,244 C-12,154 38,62 118,30 C198,0 300,0 358,28 C368,38 372,48 376,58Z" fill="#dbd5ef"/>
       </svg>
       <Container className="relative z-[1]">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-12">
-          <div className="lg:col-span-4 lg:col-start-1">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-stretch lg:gap-12">
+          <div className="flex flex-col lg:col-span-5 lg:col-start-1">
             <Eyebrow tone="brand" rule="after">
               {inAction.eyebrow}
             </Eyebrow>
@@ -82,7 +82,7 @@ export function InAction() {
 
             {/* Activity statistics */}
             {stats.length > 0 ? (
-              <dl className="mt-5 grid grid-cols-4 gap-x-3 gap-y-4">
+              <dl className="mt-5 grid grid-cols-4 gap-x-3 gap-y-4 lg:mt-auto">
                 {stats.map((stat, i) => (
                   <div key={stat.label} className={i > 0 ? "border-l border-navy/10 pl-3" : ""}>
                     <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-soft text-brand">
@@ -90,7 +90,7 @@ export function InAction() {
                     </span>
                     <dt className="sr-only">{stat.label}</dt>
                     <dd className="mt-1.5">
-                      <span className="block text-lg font-bold tabular-nums text-navy">{stat.value}</span>
+                      <span className="block text-2xl font-bold tabular-nums text-navy">{stat.value}</span>
                       <span className="block text-[0.5625rem] leading-snug text-body whitespace-pre-line">{stat.label}</span>
                     </dd>
                   </div>
@@ -100,7 +100,7 @@ export function InAction() {
           </div>
 
           {/* Featured event carousel. Every slide ships in the HTML. */}
-          <div className="relative lg:col-span-8 lg:col-start-5">
+          <div className="relative lg:col-span-7 lg:col-start-6">
             {/* Decorative sunburst — short arcs fanning from card's top-right corner */}
             <svg
               aria-hidden="true"

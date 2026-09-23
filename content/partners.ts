@@ -30,7 +30,7 @@ export type Partner = {
 };
 
 export const partners = {
-  headline: "Built through strong partnerships.",
+  headline: { plain: "Built through strong", accent: "partnerships." },
   supporting:
     "We collaborate with leading institutions and companies to create industry-ready talent and meaningful career opportunities.",
   /** Static text (not a link) under the logos - hints at partners beyond those shown. */

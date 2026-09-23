@@ -1,13 +1,33 @@
 export type BlogCategory =
-  | "career-insights"
-  | "campus"
+  | "software-development"
+  | "data-science"
+  | "artificial-intelligence"
+  | "mba"
+  | "general"
+  | "digital-marketing"
+  | "management"
+  | "finance"
+  | "agentic-ai"
+  | "dba"
+  | "generative-ai"
   | "student-stories"
-  | "future-of-work"
-  | "placement-readiness"
-  | "future-skills"
-  | "campus-to-career"
-  | "employability"
-  | "ai-education";
+  | "career-tips";
+
+export const allCategories: { value: BlogCategory; label: string }[] = [
+  { value: "software-development", label: "Software Development" },
+  { value: "data-science", label: "Data Science" },
+  { value: "artificial-intelligence", label: "Artificial Intelligence" },
+  { value: "mba", label: "MBA" },
+  { value: "general", label: "General" },
+  { value: "digital-marketing", label: "Digital Marketing" },
+  { value: "management", label: "Management" },
+  { value: "finance", label: "Finance" },
+  { value: "agentic-ai", label: "Agentic AI" },
+  { value: "dba", label: "DBA" },
+  { value: "generative-ai", label: "Generative AI" },
+  { value: "student-stories", label: "Student Stories" },
+  { value: "career-tips", label: "Career Tips" },
+];
 
 export type BlogSection = { heading: string; body: string; image?: string; imageAlt?: string };
 
@@ -26,11 +46,11 @@ export type BlogPost = {
 };
 
 export const trendingTopics: { label: string; value: BlogCategory | "all" }[] = [
-  { label: "AI in Education", value: "ai-education" },
-  { label: "Placement Readiness", value: "placement-readiness" },
-  { label: "Future Skills", value: "future-skills" },
-  { label: "Campus to Career", value: "campus-to-career" },
-  { label: "Employability", value: "employability" },
+  { label: "Generative AI", value: "generative-ai" },
+  { label: "Artificial Intelligence", value: "artificial-intelligence" },
+  { label: "Management", value: "management" },
+  { label: "Digital Marketing", value: "digital-marketing" },
+  { label: "Data Science", value: "data-science" },
 ];
 
 export const blogPosts: BlogPost[] = [
@@ -39,8 +59,8 @@ export const blogPosts: BlogPost[] = [
     title: "The Rise of AI in Career Preparation",
     excerpt:
       "How AI is reshaping student learning, career guidance and recruitment — and what this means for the next generation.",
-    category: "future-of-work",
-    categoryLabel: "Future of Work",
+    category: "artificial-intelligence",
+    categoryLabel: "Artificial Intelligence",
     date: "2024-03-14",
     readTime: 7,
     author: { name: "Neha Kapoor" },
@@ -72,8 +92,8 @@ export const blogPosts: BlogPost[] = [
     title: "What Recruiters Expect from Fresh Graduates",
     excerpt:
       "Industry hiring managers share the soft skills, technical awareness and mindset they look for in campus hires.",
-    category: "career-insights",
-    categoryLabel: "Career Insights",
+    category: "career-tips",
+    categoryLabel: "Career Tips",
     date: "2024-03-10",
     readTime: 5,
     author: { name: "Arjun Mehta" },
@@ -104,8 +124,8 @@ export const blogPosts: BlogPost[] = [
     title: "How Colleges Can Improve Employability Outcomes",
     excerpt:
       "Practical steps institutions can take to bridge the gap between academic learning and workplace expectations.",
-    category: "campus",
-    categoryLabel: "Campus",
+    category: "management",
+    categoryLabel: "Management",
     date: "2024-03-06",
     readTime: 6,
     author: { name: "Priya Nair" },
@@ -168,8 +188,8 @@ export const blogPosts: BlogPost[] = [
     title: "How to Build Placement Readiness for Students",
     excerpt:
       "A framework institutions can use to assess, develop and track campus placement readiness at scale.",
-    category: "placement-readiness",
-    categoryLabel: "Placement Readiness",
+    category: "management",
+    categoryLabel: "Management",
     date: "2024-03-05",
     readTime: 6,
     author: { name: "Lokesh R." },
@@ -200,8 +220,8 @@ export const blogPosts: BlogPost[] = [
     title: "The Rise of AI in Career Need in 2027",
     excerpt:
       "An evidence-based look at which AI competencies will define employable graduates by 2027.",
-    category: "ai-education",
-    categoryLabel: "Career Tips",
+    category: "generative-ai",
+    categoryLabel: "Generative AI",
     date: "2024-03-07",
     readTime: 7,
     author: { name: "Sneha Jadhav" },
@@ -232,8 +252,8 @@ export const blogPosts: BlogPost[] = [
     title: "Building a Stronger Student Placement Culture",
     excerpt:
       "How academic institutions can build a campus culture that normalises career planning from year one.",
-    category: "campus",
-    categoryLabel: "Campus",
+    category: "general",
+    categoryLabel: "General",
     date: "2024-03-05",
     readTime: 8,
     author: { name: "Editorial Team" },
@@ -262,13 +282,17 @@ export const blogPosts: BlogPost[] = [
 ];
 
 export const categoryColors: Record<BlogCategory, string> = {
-  "career-insights": "bg-[#e8f0fc] text-[#1a47a8]",
-  campus: "bg-[#e8f6f4] text-[#025c55]",
+  "software-development": "bg-[#e8f0fc] text-[#1a47a8]",
+  "data-science": "bg-[#fdeaea] text-[#a12d2d]",
+  "artificial-intelligence": "bg-[#ede8fc] text-[#5b2bcb]",
+  mba: "bg-[#fdf3e8] text-[#8a6400]",
+  general: "bg-[#e8f6f4] text-[#025c55]",
+  "digital-marketing": "bg-[#fdeaea] text-[#a12d2d]",
+  management: "bg-[#e8f6f4] text-[#025c55]",
+  finance: "bg-[#e8f0fc] text-[#1a47a8]",
+  "agentic-ai": "bg-[#ede8fc] text-[#5b2bcb]",
+  dba: "bg-[#fdf3e8] text-[#8a6400]",
+  "generative-ai": "bg-[#ede8fc] text-[#5b2bcb]",
   "student-stories": "bg-[#fdf3e8] text-[#8a6400]",
-  "future-of-work": "bg-[#ede8fc] text-[#5b2bcb]",
-  "placement-readiness": "bg-[#e8f6f4] text-[#025c55]",
-  "future-skills": "bg-[#fdeaea] text-[#a12d2d]",
-  "campus-to-career": "bg-[#e8f0fc] text-[#1a47a8]",
-  employability: "bg-[#ede8fc] text-[#5b2bcb]",
-  "ai-education": "bg-[#fdf3e8] text-[#8a6400]",
+  "career-tips": "bg-[#fdeaea] text-[#a12d2d]",
 };
