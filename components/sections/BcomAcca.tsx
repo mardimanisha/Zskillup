@@ -187,7 +187,7 @@ export function BcomAcca() {
         {/* 5. CTAs - Explore serves visitors who need more information first;
             Talk to a Career Advisor opens the enquiry route for high-intent
             users. Nobody is asked to fill in a form immediately. */}
-        <div className="mt-14 flex flex-wrap items-center gap-4">
+        <div className="mt-8 flex flex-wrap items-center gap-4">
           <Button href={commerce.primaryCta.href} variant="vertical" tone="commerce" size="lg">
             {commerce.primaryCta.label}
           </Button>

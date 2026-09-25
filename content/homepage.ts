@@ -105,6 +105,8 @@ export const leadership = {
     blue: "towards",
     coral: "real careers.",
   },
+  intro:
+    "ZSkillup is building a smarter path from classroom to career. Through practical learning, technology and industry exposure, we help students become job-ready, future-ready and globally relevant.",
   mission: {
     title: "Our Mission",
     /** Broken to match the design on desktop; wraps naturally on small screens. */
@@ -357,7 +359,7 @@ export const prephasz = {
       features: ["Job Board", "Resume Builder", "Mock Interviews", "Placement Opportunities"],
     },
     {
-      title: "Track Outcomes",
+      title: "Track",
       tagline: "See your progress and achievements over time.",
       features: ["Certificates", "Leaderboards", "Student Reports", "Institutional Analytics"],
     },
@@ -382,23 +384,23 @@ export const commerce = {
     line2Accent: "the careers of tomorrow.",
   },
   supporting:
-    "The Global Finance & AI Professional Program combines practical finance knowledge, AI-enabled skills, career development, and industry exposure.",
+    "Build your undergraduate degree alongside industry-focused learning in global finance, AI-enabled skills, career development and real-world exposure — designed to prepare you for modern finance careers.",
   /** Handwritten accent 2 of 2 on the homepage. */
   handwritten: "More opportunities ahead",
   /** Three connected blocks reading as ONE integrated pathway, one colour family. */
   pathway: [
-    { title: "Global Finance", body: "Build practical knowledge for modern finance careers." },
-    { title: "AI-Enabled Skills", body: "Learn to use AI in a changing workplace." },
-    { title: "Career Development", body: "Strengthen the skills employers value." },
+    { title: "Global Finance", body: "Build practical finance knowledge alongside your degree." },
+    { title: "AI-Enabled Skills", body: "Learn to use AI in a changing finance workplace." },
+    { title: "Career Development", body: "Build the professional skills employers value." },
   ],
   /** Sits beneath the three blocks as a smaller, secondary note. */
   industryExposure: {
-    title: "Industry Exposure",
-    body: "Connect your learning with real-world practice.",
+    title: "Degree + Industry Exposure",
+    body: "Combine academic learning with practical, real-world experience.",
   },
   /** Printed on the stacked books in the photograph, top to bottom. */
   bookSpines: ["Global Finance", "AI Skills", "Global Careers"],
-  shortNote: "Program components and availability may vary by institution.",
+  shortNote: "*may vary based on the institution",
   careersHeadline: "Explore career pathways",
   careersBody:
     "Discover opportunities across accounting, audit, business finance, risk, tax, consulting, fintech, and financial services.",

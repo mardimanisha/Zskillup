@@ -96,7 +96,10 @@ export function Leadership() {
               </span>
             </h2>
 
-            <div className="mt-10 flex flex-col md:mt-9 xl:mt-11 xl:flex-1">
+            <div className="mt-8 flex flex-col md:mt-9 xl:mt-8 xl:flex-1">
+              <p className="mb-8 max-w-[34rem] text-[1.0625rem] font-medium leading-[1.6] text-muted sm:text-[1.125rem]">
+                {leadership.intro}
+              </p>
               <div className="flex items-center gap-5 sm:gap-6">
                 <span className="grid h-[4.5rem] w-[4.5rem] shrink-0 place-items-center rounded-full bg-[#ece7fb] text-brand shadow-[inset_0_0_0_1px_rgb(91_43_203/0.08),0_10px_24px_-14px_rgb(91_43_203/0.35)] sm:h-24 sm:w-24">
                   <Icon name="graduation" className="h-8 w-8 sm:h-10 sm:w-10" />

@@ -7,7 +7,7 @@
  *
  * So: add entries to the arrays below and the carousel absorbs them. Nothing else
  * changes. The homepage deliberately shows a window onto the network, not a
- * directory - the static "& Many More" note signals the list runs beyond what shows.
+ * directory.
  *
  * ---------------------------------------------------------------------------
  *  LOGOS
@@ -33,8 +33,6 @@ export const partners = {
   headline: { plain: "Built through strong", accent: "partnerships." },
   supporting:
     "We collaborate with leading institutions and companies to create industry-ready talent and meaningful career opportunities.",
-  /** Static text (not a link) under the logos - hints at partners beyond those shown. */
-  more: "& Many More",
   explore: { label: "Explore Our Partners", href: "#partner-with-us" },
 } as const;
 

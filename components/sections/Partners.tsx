@@ -16,7 +16,7 @@ import { Container, Eyebrow, Heading, Lede, Section } from "@/components/ui/Sect
  * any redesign of the homepage."
  *
  * How that is met:
- *   - a three-row marquee splits entries evenly across the rows, and simply
+ *   - a three-row marquee shows every entry in each row, and simply
  *     absorbs more by growing each row if the source list ever grows;
  *   - every tile is the same fixed size, so logos never render at mixed scales;
  *   - the homepage communicates scale and quality of network, not a directory.
@@ -123,20 +123,11 @@ export function Partners() {
                 id={`panel-${tab.id}`}
                 aria-labelledby={`tab-${tab.id}`}
                 hidden={tab.id !== active}
-                className="mt-6"
+                className="mt-6 flex-1 flex-col [&:not([hidden])]:flex"
               >
                 <PartnerScroller label={tab.label} partners={tab.partners} />
               </div>
             ))}
-
-            {/* Static note, deliberately not a link or button. mt-auto pins it to
-                the column's bottom so it lines up with the left column's last
-                line (the grid stretches both columns to the same height by
-                default) instead of trailing right after the logos with a gap
-                of dead space below. */}
-            <p className="mt-auto pt-6 text-right text-[0.9375rem] font-medium tracking-wide text-muted">
-              {partners.more}
-            </p>
           </div>
         </div>
       </Container>
@@ -154,7 +145,6 @@ const MARQUEE_SPEED_PX_PER_SEC = 36;
  * scaled back to keep the two sides visually balanced.
  */
 const TILE_WIDTH = "w-[9rem] sm:w-[9.75rem]";
-const TILE_HEIGHT = "h-[6.25rem] sm:h-[6.75rem]";
 
 /**
  * The marquee loop only reads as continuous if one copy of a row's tiles is
@@ -177,11 +167,11 @@ function padRow(row: readonly Partner[], min: number): Partner[] {
 }
 
 /**
- * Three-row marquee: the list is split into three roughly-equal chunks, one
- * per row, alternating scroll direction (top and bottom reversed, middle
- * not) so adjacent rows never drift in lockstep. Each row is its own
- * independent track, so the rows can differ in width/duration without
- * affecting one another.
+ * Three-row marquee: every row shows the full list (start offsets differ),
+ * alternating scroll direction (top and bottom reversed, middle not) so
+ * adjacent rows never drift in lockstep. Each row is its own independent
+ * track, so the rows can differ in width/duration without affecting one
+ * another.
  */
 function PartnerScroller({
   label,
@@ -190,14 +180,17 @@ function PartnerScroller({
   label: string;
   partners: readonly Partner[];
 }) {
-  const perRow = Math.ceil(list.length / 3);
-  const top = padRow(list.slice(0, perRow), MIN_TILES_PER_ROW);
-  const middle = padRow(list.slice(perRow, perRow * 2), MIN_TILES_PER_ROW);
-  const bottom = padRow(list.slice(perRow * 2, perRow * 3), MIN_TILES_PER_ROW);
+  // Every row carries the full list; the middle and bottom rows start at a
+  // rotated offset so the three rows don't show the same logos in lockstep.
+  const rotate = (offset: number) => [...list.slice(offset), ...list.slice(0, offset)];
+  const shift = Math.floor(list.length / 3);
+  const top = padRow(list, MIN_TILES_PER_ROW);
+  const middle = padRow(rotate(shift), MIN_TILES_PER_ROW);
+  const bottom = padRow(rotate(shift * 2), MIN_TILES_PER_ROW);
 
   return (
     <div
-      className="partner-marquee relative overflow-hidden"
+      className="partner-marquee relative flex flex-col overflow-hidden lg:flex-1"
       role="group"
       aria-label={`${label} logos`}
       tabIndex={0}
@@ -242,7 +235,7 @@ function PartnerRow({
   return (
     <ul
       ref={trackRef}
-      className={`partner-track w-max flex gap-3 pb-1 ${reverse ? "partner-track-reverse" : ""} ${rowKey !== "top" ? "mt-3" : ""}`}
+      className={`partner-track w-max flex gap-3 lg:flex-1${reverse ? "partner-track-reverse" : ""} ${rowKey !== "top" ? "mt-3" : ""}`}
       style={{ animationDuration: `${duration}s` }}
     >
       {row.map((partner, i) => (
@@ -274,7 +267,7 @@ function PartnerRow({
  */
 function PartnerTile({ partner }: { partner: Partner }) {
   return (
-    <div className={`flex ${TILE_HEIGHT} items-center justify-center rounded-tile border border-line bg-white px-4 py-3 shadow-card`}>
+    <div className={`flex h-full min-h-[6.25rem] items-center justify-center rounded-tile border border-line bg-white px-4 py-3 shadow-card`}>
       {partner.logo ? (
         <Image
           src={asset(partner.logo)}
