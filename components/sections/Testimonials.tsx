@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { asset } from "@/lib/asset";
-import { initials } from "@/content/media";
-import { testimonialsIntro, type Testimonial } from "@/content/testimonials";
+import { initials, learnerPhoto } from "@/content/media";
+import { testimonials as dummyTestimonials, testimonialsIntro, type Testimonial } from "@/content/testimonials";
 import { mapTestimonial } from "@/lib/db-types";
 import { supabase } from "@/lib/supabase";
 import { Container, Eyebrow, Heading, Lede, Section } from "@/components/ui/Section";
@@ -52,7 +52,7 @@ export function Testimonials() {
   const trackRef = useRef<HTMLUListElement>(null);
   const [duration, setDuration] = useState(60);
   const [tapPaused, setTapPaused] = useState(false);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [testimonials, setTestimonials] = useState<readonly Testimonial[]>(dummyTestimonials); // dummy until admin adds real ones
 
   useEffect(() => {
     let cancelled = false;
@@ -61,7 +61,7 @@ export function Testimonials() {
       .select("*")
       .order("sort_order", { ascending: true })
       .then(({ data, error }) => {
-        if (cancelled || error || !data) return;
+        if (cancelled || error || !data || data.length === 0) return;
         setTestimonials(data.map(mapTestimonial));
       });
     return () => {
@@ -97,7 +97,9 @@ export function Testimonials() {
   const renderCards = (copy: "original" | "clone") =>
     testimonials.map((t) => {
       const tint = cardTints[t.vertical];
-      const photo = t.photoUrl ? { src: t.photoUrl, alt: `Portrait of ${t.name}`, width: 256, height: 256 } : null;
+      const photo = t.photoUrl
+        ? { src: t.photoUrl, alt: `Portrait of ${t.name}`, width: 256, height: 256 }
+        : learnerPhoto(t.slug, t.name);
       return (
         <li
           key={`${copy}-${t.slug}`}

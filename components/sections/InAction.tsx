@@ -6,7 +6,9 @@ import { asset } from "@/lib/asset";
 import {
   badgeColors,
   badgeLabels,
+  featuredEvents as dummyFeatured,
   galleryFilters,
+  galleryPhotos as dummyGallery,
   inAction,
   type GalleryCategory,
   type Photo,
@@ -50,8 +52,8 @@ export function InAction() {
     filterRef.current?.scrollBy({ left: dir * 200, behavior: "smooth" });
   const stats = publishable(activityStats);
 
-  const [featuredEvents, setFeaturedEvents] = useState<Photo[]>([]);
-  const [galleryPhotos, setGalleryPhotos] = useState<Photo[]>([]);
+  const [featuredEvents, setFeaturedEvents] = useState<readonly Photo[]>(dummyFeatured); // dummy until admin adds real events
+  const [galleryPhotos, setGalleryPhotos] = useState<readonly Photo[]>(dummyGallery);
 
   useEffect(() => {
     let cancelled = false;
@@ -60,7 +62,7 @@ export function InAction() {
       .select("*")
       .order("created_at", { ascending: false })
       .then(({ data, error }) => {
-        if (cancelled || error || !data) return;
+        if (cancelled || error || !data || data.length === 0) return;
         const rows = data.map(mapEvent);
         const featuredRows = rows.filter((r) => r.isFeatured);
         const galleryRows = rows.filter((r) => !r.isFeatured);

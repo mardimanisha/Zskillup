@@ -4,7 +4,7 @@ import { Fragment, Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { categoryColors, type BlogPost } from "@/content/blog";
+import { blogPosts as dummyPosts, categoryColors, type BlogPost } from "@/content/blog";
 import { mapBlogPost } from "@/lib/db-types";
 import { supabase } from "@/lib/supabase";
 import { Icon } from "@/components/ui/Icon";
@@ -61,8 +61,15 @@ function BlogPostContent() {
   const searchParams = useSearchParams();
   const slug = searchParams.get("slug");
 
-  const [post, setPost] = useState<BlogPost | null | undefined>(undefined);
-  const [related, setRelated] = useState<BlogPost[]>([]);
+  // Dummy posts are the fallback until the admin adds real ones.
+  const dummyPost = dummyPosts.find((p) => p.slug === slug) ?? null;
+  const dummyRelated = dummyPost
+    ? dummyPosts.filter((p) => p.slug !== dummyPost.slug && p.category === dummyPost.category).slice(0, 3)
+    : [];
+  const [dbPost, setPost] = useState<BlogPost | null | undefined>(undefined);
+  const [dbRelated, setRelated] = useState<BlogPost[] | null>(null);
+  const post = dbPost ?? (dummyPost ?? dbPost);
+  const related = dbRelated ?? dummyRelated;
 
   useEffect(() => {
     if (!slug) return;
@@ -76,7 +83,7 @@ function BlogPostContent() {
       .then(async ({ data, error }) => {
         if (cancelled) return;
         if (error || !data) {
-          setPost(null);
+          setPost(dummyPost ? undefined : null);
           return;
         }
         const mapped = mapBlogPost(data);

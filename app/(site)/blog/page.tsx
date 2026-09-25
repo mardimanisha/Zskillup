@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Container } from "@/components/ui/Section";
-import { allCategories, categoryColors, type BlogCategory, type BlogPost } from "@/content/blog";
+import { allCategories, blogPosts as dummyPosts, categoryColors, type BlogCategory, type BlogPost } from "@/content/blog";
 import { mapBlogPost } from "@/lib/db-types";
 import { supabase } from "@/lib/supabase";
 
@@ -57,7 +57,7 @@ function BlogGridCard({ post }: { post: BlogPost }) {
   );
 }
 
-function InsightsHero({ blogPosts }: { blogPosts: BlogPost[] }) {
+function InsightsHero({ blogPosts }: { blogPosts: readonly BlogPost[] }) {
   const slides = blogPosts.slice(0, 5);
   const [active, setActive] = useState(0);
 
@@ -214,8 +214,8 @@ function CategorySidebarButton({
 
 export default function InsightsPage() {
   const [activeFilter, setActiveFilter] = useState<BlogCategory | "all">("all");
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [blogPosts, setBlogPosts] = useState<readonly BlogPost[]>(dummyPosts); // dummy until admin adds real posts
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -227,11 +227,9 @@ export default function InsightsPage() {
         if (cancelled) return;
         if (error) {
           console.error("Failed to load blog posts", error);
-          setBlogPosts([]);
-        } else {
-          setBlogPosts((data ?? []).map(mapBlogPost));
+        } else if (data && data.length > 0) {
+          setBlogPosts(data.map(mapBlogPost));
         }
-        setLoading(false);
       });
     return () => {
       cancelled = true;
