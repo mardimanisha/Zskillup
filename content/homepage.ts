@@ -110,7 +110,6 @@ export const leadership = {
     /** Broken to match the design on desktop; wraps naturally on small screens. */
     lines: ["To make high-quality,", "career-focused education", "accessible to every learner."],
   },
-  tagline: ["Learners today.", "Leaders tomorrow."],
   label: "Our leadership",
   people: [
     {
@@ -172,7 +171,7 @@ export const chooseRoute: {
       eyebrow: "For Institutions",
       brand: "Tech & Management",
       title: "Build Employability\ninto the\nstudent journey",
-      body: "Plan, deliver and measure career readiness across cohorts for approach designed for institution.",
+      body: "Plan, deliver and measure career readiness across student cohorts with an approach built for institutions.",
       features: ["Customised programmes", "Track outcomes", "Stronger student success"],
       cta: { label: "Explore Institutional Solutions", href: "#institutions" },
     },
@@ -182,7 +181,7 @@ export const chooseRoute: {
       eyebrow: "For Placement Preparation",
       brand: "prephasz",
       title: "Stop guessing\nwhat to\nprepare next.",
-      body: "Practise for the stages recruiters use, find the areas holding you back and prepare with a clearer plan.",
+      body: "Practise for real recruitment stages, identify the areas holding you back and prepare with a clearer, focused plan.",
       features: ["Mock tests & practice", "Personalised insights", "Get job ready"],
       cta: { label: "Explore prephasz", href: "#prephasz" },
     },
@@ -192,7 +191,7 @@ export const chooseRoute: {
       eyebrow: "For Global Finance Careers",
       brand: "Global Finance & AI",
       title: "Future-Ready.\nAI-Enabled.\nGlobally Employable.",
-      body: "The Global Finance & AI Professional Program builds practical finance, AI, and workplace skills for global career opportunities.",
+      body: "Build practical finance, AI and workplace skills through a degree program designed for global career opportunities.",
       features: ["Practical finance knowledge", "AI-enabled workplace skills", "Global career preparation"],
       // The Button renders its own trailing arrow, so "Explore the Program →" is
       // the visible result of this label - a literal "→" here would double it.

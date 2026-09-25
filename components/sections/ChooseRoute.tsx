@@ -84,14 +84,18 @@ export function ChooseRoute() {
               overflow at every desktop width, container cap included, no
               matter how the gap was tuned. This combination gives it
               healthy clearance instead of a 1px margin. */}
-          <ul className="grid gap-3 lg:col-span-10 lg:grid-cols-3">
+          {/* On lg+ each card spans the same 4 shared rows via subgrid (top
+              block / features / CTA / outcome), so dividers, feature lists and
+              buttons line up across cards however long each body wraps. */}
+          <ul className="grid gap-3 lg:col-span-10 lg:grid-cols-3 lg:grid-rows-[auto_auto_1fr_auto] lg:gap-y-0">
             {chooseRoute.cards.map((card) => {
               const style = verticalStyles[card.vertical];
               return (
-                <li key={card.eyebrow} className="flex">
+                <li key={card.eyebrow} className="flex lg:row-span-4 lg:grid lg:grid-rows-subgrid">
                   <article
-                    className={`relative flex w-full flex-col overflow-hidden rounded-card border ${style.border} ${style.tint} p-6 shadow-card`}
+                    className={`relative flex w-full flex-col overflow-hidden rounded-card border ${style.border} ${style.tint} p-6 shadow-card lg:row-span-4 lg:grid lg:grid-rows-subgrid`}
                   >
+                    <div className="flex flex-col">
                     {/* Soft decorative circle in the corner, as in the design. */}
                     <span
                       aria-hidden="true"
@@ -184,39 +188,42 @@ export function ChooseRoute() {
                     >
                       {card.body}
                     </p>
+                    </div>
 
-                    <span
-                      aria-hidden="true"
-                      className="relative my-6 block h-px w-full bg-navy/10"
-                    />
+                    <div className="flex flex-col">
+                      <span
+                        aria-hidden="true"
+                        className="relative my-6 block h-px w-full bg-navy/10"
+                      />
 
-                    <ul className="relative space-y-3">
-                      {card.features.map((feature, i) => (
-                        <li key={feature} className="flex items-center gap-3">
-                          <span
-                            className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg ${style.band} ${style.text}`}
-                          >
-                            <Icon
-                              name={featureIcons[card.vertical][i]}
-                              className="h-[0.95rem] w-[0.95rem]"
-                            />
-                          </span>
-                          <span className="text-[0.9375rem] text-navy">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                      <ul className="relative space-y-3">
+                        {card.features.map((feature, i) => (
+                          <li key={feature} className="flex items-center gap-3">
+                            <span
+                              className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg ${style.band} ${style.text}`}
+                            >
+                              <Icon
+                                name={featureIcons[card.vertical][i]}
+                                className="h-[0.95rem] w-[0.95rem]"
+                              />
+                            </span>
+                            <span className="text-[0.9375rem] text-navy">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                    <div className="relative mt-7 flex-1" />
-
-                    <Button
-                      href={card.cta.href}
-                      variant={ctaVariant[card.vertical]}
-                      tone={card.vertical}
-                      size="sm"
-                      className="relative w-full"
-                    >
-                      {card.cta.label}
-                    </Button>
+                    <div className="mt-7 flex items-end">
+                      <Button
+                        href={card.cta.href}
+                        variant={ctaVariant[card.vertical]}
+                        tone={card.vertical}
+                        size="sm"
+                        className="relative w-full"
+                      >
+                        {card.cta.label}
+                      </Button>
+                    </div>
 
                     {/* Ties all three routes back to one ZSkillup outcome. */}
                     <p

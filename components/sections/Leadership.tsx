@@ -115,16 +115,6 @@ export function Leadership() {
                   </p>
                 </div>
               </div>
-
-              <span aria-hidden="true" className="mt-9 block h-px w-24 bg-[#c7cbdd] xl:mt-10" />
-
-              <p className="handwritten mt-7 -rotate-[3deg] origin-left text-[2rem] leading-[1.2] text-muted sm:text-[2.25rem] xl:mt-auto xl:pt-8">
-                {leadership.tagline.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </p>
             </div>
           </div>
 
