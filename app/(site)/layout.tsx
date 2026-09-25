@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Caveat, Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/content/site";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SeoSync } from "@/components/layout/SeoSync";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { FloatingEnquiryButtons } from "@/components/sections/FloatingEnquiryButtons";
 import "./globals.css";
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <SiteFooter />
         <FloatingEnquiryButtons />
+        <SeoSync />
       </body>
     </html>
   );

@@ -158,7 +158,7 @@ export function InAction() {
                       height={340}
                       priority={i === 0}
                       sizes="(min-width: 1024px) 700px, 100vw"
-                      className="aspect-[694/340] w-full object-cover"
+                      className="aspect-[4/5] w-full object-cover min-[480px]:aspect-[4/3] md:aspect-[694/340]"
                     />
                     <p
                       aria-hidden="true"
@@ -171,7 +171,7 @@ export function InAction() {
                       {inAction.featuredBadge}
                     </span>
                     {/* Title + short descriptor overlay, as real text. */}
-                    <figcaption className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(6,13,26,0.92),rgba(6,13,26,0.5)_50%,transparent)] px-6 pt-16 pb-6">
+                    <figcaption className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(6,13,26,0.92),rgba(6,13,26,0.5)_50%,transparent)] px-5 pt-16 pb-20 sm:px-6 sm:pb-6">
                       {event.date && (
                         <p className="mb-2 text-[0.6875rem] font-semibold uppercase tracking-widest text-white/60">
                           {event.date.toUpperCase()}{event.location ? ` · ${event.location.toUpperCase()}` : ""}
@@ -193,7 +193,7 @@ export function InAction() {
                 ))}
               </div>
 
-              <div className="absolute right-5 bottom-5 flex items-center gap-3">
+              <div className="absolute right-5 bottom-5 flex items-center gap-3 max-sm:left-5 max-sm:justify-end">
                 <p className="text-sm font-semibold tabular-nums text-white/85">
                   <span className="sr-only">Showing item </span>
                   {String(featured + 1).padStart(2, "0")}

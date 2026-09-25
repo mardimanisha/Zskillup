@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { faqs } from "@/content/faqs";
+import { resolveSeo, seoPages, type DbSeoPage } from "@/content/seo";
 import { contact, site } from "@/content/site";
+import { supabase } from "@/lib/supabase";
 import { Hero } from "@/components/sections/Hero";
 import { HomepageStats } from "@/components/sections/HomepageStats";
 import { Leadership } from "@/components/sections/Leadership";
@@ -14,12 +16,31 @@ import { InAction } from "@/components/sections/InAction";
 import { Faqs } from "@/components/sections/Faqs";
 import { FinalCta } from "@/components/sections/FinalCta";
 
-export const metadata: Metadata = {
-  title: "ZSkillup | Industry-Ready Careers for Students & Institutions",
-  description:
-    "Degrees create graduates. ZSkillup helps create industry-ready professionals - through employability programs for institutions, the prephasz placement-preparation platform and the Global Finance Program career pathway.",
-  alternates: { canonical: "/" },
-};
+/**
+ * Build-time metadata, so the exported HTML already carries whatever was saved
+ * in /admin/seo when the site was last built (SeoSync applies later edits live).
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const page = seoPages[0];
+  let row: DbSeoPage | null = null;
+  try {
+    const { data } = await supabase.from("seo_pages").select("*").eq("path", page.path).maybeSingle();
+    row = data as DbSeoPage | null;
+  } catch {
+    // Supabase unreachable at build time - fall back to the defaults.
+  }
+  const seo = resolveSeo(page, row);
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    keywords: seo.keywords || undefined,
+    alternates: { canonical: "/" },
+    ...(seo.ogImage && {
+      openGraph: { title: seo.metaTitle, description: seo.metaDescription, images: [seo.ogImage] },
+      twitter: { card: "summary_large_image", title: seo.metaTitle, description: seo.metaDescription, images: [seo.ogImage] },
+    }),
+  };
+}
 
 /**
  * Homepage.

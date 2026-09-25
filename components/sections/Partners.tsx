@@ -235,7 +235,7 @@ function PartnerRow({
   return (
     <ul
       ref={trackRef}
-      className={`partner-track w-max flex gap-3 lg:flex-1${reverse ? "partner-track-reverse" : ""} ${rowKey !== "top" ? "mt-3" : ""}`}
+      className={`partner-track w-max flex gap-3 lg:flex-1 ${reverse ? "partner-track-reverse" : ""} ${rowKey !== "top" ? "mt-3" : ""}`}
       style={{ animationDuration: `${duration}s` }}
     >
       {row.map((partner, i) => (

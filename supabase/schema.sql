@@ -182,3 +182,41 @@ create policy "media_delete_authenticated"
   on storage.objects for delete
   to authenticated
   using (bucket_id = 'media');
+
+-- ---------------------------------------------------------------------------
+-- seo_pages
+-- One row per public page, keyed by its path ("/", "/blog", "/events").
+-- Edited from /admin/seo. A missing row just means "use the built-in default"
+-- from content/seo.ts, so this table can start empty.
+-- ---------------------------------------------------------------------------
+create table if not exists public.seo_pages (
+  path text primary key,
+  meta_title text not null default '',
+  meta_description text not null default '',
+  keywords text not null default '',
+  og_image text not null default '',
+  updated_at timestamptz not null default now()
+);
+
+alter table public.seo_pages enable row level security;
+
+create policy "seo_pages_select_anyone"
+  on public.seo_pages for select
+  to anon, authenticated
+  using (true);
+
+create policy "seo_pages_insert_authenticated"
+  on public.seo_pages for insert
+  to authenticated
+  with check (true);
+
+create policy "seo_pages_update_authenticated"
+  on public.seo_pages for update
+  to authenticated
+  using (true)
+  with check (true);
+
+create policy "seo_pages_delete_authenticated"
+  on public.seo_pages for delete
+  to authenticated
+  using (true);

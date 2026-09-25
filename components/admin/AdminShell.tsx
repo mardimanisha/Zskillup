@@ -67,6 +67,9 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             <Link href="/admin/testimonials" className="text-neutral-600 hover:text-neutral-900">
               Testimonials
             </Link>
+            <Link href="/admin/seo" className="text-neutral-600 hover:text-neutral-900">
+              SEO
+            </Link>
           </nav>
         </div>
         <div className="flex items-center gap-4">
