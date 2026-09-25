@@ -47,11 +47,11 @@ import { Icon, type IconName } from "@/components/ui/Icon";
 
 const icons: IconName[] = ["book", "file", "chart", "graduation", "briefcase", "trending"];
 
-/** Every card shares the same icon well / icon colour (the brand yellow, with
- *  a subtle gradient on the well) and the same collapsed pastel field. */
-const ICON_WELL = "bg-gradient-to-b from-[#fdefc9] to-[#fbe2a0]";
-const ICON_COLOR = "text-[#a86f00]";
-const CARD_TINT = "from-white to-white";
+/** Every card is the amber -> orange gradient of the rank card; the icon well is
+ *  a brown gradient with white icon / pill text; headings stay dark brown. */
+const ICON_WELL = "bg-gradient-to-br from-[#8a5416] via-[#6b3c0a] to-[#3f2200]";
+const ICON_COLOR = "text-white";
+const CARD_TINT = "from-transparent to-transparent";
 
 const tints: { well: string; icon: string; card: string }[] = [
   { well: ICON_WELL, icon: ICON_COLOR, card: CARD_TINT },
@@ -162,12 +162,12 @@ export function PrephaszJourney() {
               <li
                 key={pillar.title}
                 style={{ flexGrow: isActive ? "var(--g)" : 1, zIndex: 10 - Math.abs(i - active) }}
-                className={`relative min-w-0 basis-0 overflow-hidden rounded-[1.5rem] bg-white transition-[flex-grow,box-shadow] duration-300 ease-out motion-reduce:transition-none md:rounded-[1.625rem] ${
+                className={`relative min-w-0 basis-0 overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-[#ffd24d] via-[#fbaa17] to-[#d97706] transition-[flex-grow,box-shadow] duration-300 ease-out motion-reduce:transition-none md:rounded-[1.625rem] ${
                   i > 0 ? "md:-ml-[var(--ov)]" : ""
                 } ${isActive ? "block" : "hidden md:block"} ${
                   isActive
-                    ? "shadow-[0_2px_8px_rgb(12_21_38/0.05),0_22px_44px_-20px_rgb(12_21_38/0.22)]"
-                    : "shadow-[0_10px_30px_-22px_rgb(12_21_38/0.35)] hover:brightness-[0.985]"
+                    ? "shadow-[0_2px_8px_rgb(120_60_0/0.12),0_22px_44px_-20px_rgb(200_110_0/0.55)]"
+                    : "shadow-[0_10px_30px_-22px_rgb(120_60_0/0.45)] hover:brightness-[0.985]"
                 }`}
               >
                 {/* Pastel field, faded out (not swapped) as the card opens. */}
@@ -204,10 +204,10 @@ export function PrephaszJourney() {
                   >
                     <Icon name={icons[i]} className={`h-[1.3rem] w-[1.3rem] lg:h-7 lg:w-7 ${tint.icon}`} />
                   </span>
-                  <span className="mt-4 text-sm font-medium text-[#485a8a] lg:mt-5 lg:text-lg">
+                  <span className="mt-4 text-sm font-medium text-[#5a3400] lg:mt-5 lg:text-lg">
                     {pad(i)}
                   </span>
-                  <span className="mt-1.5 text-[0.68rem] leading-tight font-semibold text-navy lg:mt-2 lg:text-[0.85rem] min-[75rem]:text-[0.92rem]">
+                  <span className="mt-1.5 text-[0.68rem] leading-tight font-semibold text-[#3b2300] lg:mt-2 lg:text-[0.85rem] min-[75rem]:text-[0.92rem]">
                     {pillar.title}
                   </span>
                 </div>
@@ -227,7 +227,7 @@ export function PrephaszJourney() {
                 <span
                   aria-hidden="true"
                   className={`pointer-events-none absolute inset-0 rounded-[inherit] border transition-colors duration-300 motion-reduce:transition-none ${
-                    isActive ? "border-[#e6e9f2]" : "border-transparent"
+                    isActive ? "border-white/50" : "border-white/25"
                   }`}
                 />
               </li>
@@ -282,7 +282,7 @@ function ExpandedFace({
       {...rest}
       className={`flex w-full items-start gap-3 px-5 pt-[1.125rem] pb-4 sm:gap-4 sm:px-8 md:w-[var(--open)] md:px-5 lg:px-8 ${className}`}
     >
-      <span className="absolute top-5 right-5 text-base font-medium text-[#5b6a92] sm:top-6 sm:right-8 sm:text-lg md:right-5 lg:right-8 min-[75rem]:text-[1.15rem]">
+      <span className="absolute top-5 right-5 text-base font-medium text-[#5a3400] sm:top-6 sm:right-8 sm:text-lg md:right-5 lg:right-8 min-[75rem]:text-[1.15rem]">
         {pad(i)}
       </span>
 
@@ -303,13 +303,13 @@ function ExpandedFace({
         {/* The right inset keeps the title clear of the step number, which sits
             in the top-right corner of this same row: a long title wraps instead
             of running underneath it. */}
-        <h4 className="pr-7 text-[1.25rem] leading-none font-extrabold tracking-[-0.03em] text-navy sm:text-[1.6rem] md:text-[1.45rem] lg:text-[1.6rem] min-[75rem]:pr-9 min-[75rem]:text-[1.75rem]">
+        <h4 className="pr-7 text-[1.25rem] leading-none font-extrabold tracking-[-0.03em] text-[#3b2300] sm:text-[1.6rem] md:text-[1.45rem] lg:text-[1.6rem] min-[75rem]:pr-9 min-[75rem]:text-[1.75rem]">
           {pillar.title}
         </h4>
 
         {/* Width cap is in em, so the description keeps the same measure as
             its type scales. */}
-        <p className="mt-1.5 max-w-[18.5em] text-pretty text-[0.75rem] leading-snug font-medium text-[#5b6a92] sm:text-[0.85rem] md:text-[0.75rem] lg:text-[0.85rem] min-[75rem]:text-[0.94rem]">
+        <p className="mt-1.5 max-w-[18.5em] text-pretty text-[0.75rem] leading-snug font-medium text-[#5a3400] sm:text-[0.85rem] md:text-[0.75rem] lg:text-[0.85rem] min-[75rem]:text-[0.94rem]">
           {pillar.tagline}
         </p>
 
@@ -319,7 +319,7 @@ function ExpandedFace({
           {pillar.features.map((feature) => (
             <li
               key={feature}
-              className={`flex items-center rounded-full px-[0.89rem] py-2 text-[0.64rem] leading-tight font-medium text-[#485a8a] sm:px-4 sm:text-[0.7rem] md:px-[0.89rem] md:text-[0.64rem] lg:px-4 lg:text-[0.7rem] min-[75rem]:px-[1.1125rem] min-[75rem]:py-2.5 min-[75rem]:text-[0.8rem] ${tint.well}`}
+              className={`flex items-center rounded-full px-[0.89rem] py-2 text-[0.64rem] leading-tight font-medium text-white sm:px-4 sm:text-[0.7rem] md:px-[0.89rem] md:text-[0.64rem] lg:px-4 lg:text-[0.7rem] min-[75rem]:px-[1.1125rem] min-[75rem]:py-2.5 min-[75rem]:text-[0.8rem] ${tint.well}`}
             >
               {feature}
             </li>

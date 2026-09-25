@@ -5,7 +5,7 @@ import type { Stat } from "@/content/stats";
 
 /**
  * The "For Institutions" credibility trio (Partner Institutions / Students
- * Trained / Placement Readiness Verified), count-up animated from 0 once the
+ * Trained / Placement Success Rate), count-up animated from 0 once the
  * block scrolls into view.
  *
  * Same parse-prefix/target/decimals/suffix-and-snap-to-the-exact-source-

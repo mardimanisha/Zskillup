@@ -107,7 +107,7 @@ export function InAction() {
 
             {/* Activity statistics */}
             {stats.length > 0 ? (
-              <dl className="mt-5 grid grid-cols-4 gap-x-3 gap-y-4 lg:mt-auto">
+              <dl className="mt-5 grid grid-cols-3 gap-x-3 gap-y-4 lg:mt-auto">
                 {stats.map((stat, i) => (
                   <div key={stat.label} className={i > 0 ? "border-l border-navy/10 pl-3" : ""}>
                     <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-soft text-brand">
@@ -229,7 +229,7 @@ export function InAction() {
             aria-label="Filter photographs by category"
             className="no-scrollbar flex flex-1 gap-2 overflow-x-auto pb-1"
           >
-            {galleryFilters.map((f) => {
+            {galleryFilters.filter((f) => f.id !== "events" && f.id !== "community").map((f) => {
               const selected = f.id === filter;
               return (
                 <button

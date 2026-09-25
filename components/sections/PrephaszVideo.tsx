@@ -55,28 +55,42 @@ export function PrephaszVideo({ video, label }: { video: VideoSource; label: str
         className={`absolute inset-0 transition-opacity duration-300 ${playing ? "pointer-events-none opacity-0" : "opacity-100"}`}
       >
         <div className="absolute inset-0 bg-prep-soft" />
-        <div
-          aria-hidden="true"
-          className="absolute -top-1/3 -right-1/4 h-[85%] w-[65%] rounded-full bg-prep/45 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute -bottom-1/3 -left-1/4 h-[70%] w-[55%] rounded-full bg-prep/25 blur-3xl"
-        />
-
-        <PrephaszLogo className="absolute top-4 left-4 h-6 sm:top-5 sm:left-5 sm:h-7" />
+        {video.thumbnail ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={asset(video.thumbnail)}
+            alt=""
+            // The artwork has a small built-in margin; scaling trims it so the
+            // image fills the rounded frame edge to edge.
+            className="absolute inset-0 h-full w-full scale-[1.07] object-cover"
+          />
+        ) : (
+          <>
+            <div
+              aria-hidden="true"
+              className="absolute -top-1/3 -right-1/4 h-[85%] w-[65%] rounded-full bg-prep/45 blur-3xl"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute -bottom-1/3 -left-1/4 h-[70%] w-[55%] rounded-full bg-prep/25 blur-3xl"
+            />
+            <PrephaszLogo className="absolute top-4 left-4 h-6 sm:top-5 sm:left-5 sm:h-7" />
+          </>
+        )}
 
         {video.url ? (
           <button
             type="button"
             onClick={() => setPlaying(true)}
             aria-label={`Play: ${video.title}`}
-            className="group absolute inset-0 flex flex-col items-center justify-center gap-3"
+            className={`group absolute inset-0 flex flex-col items-center justify-center gap-3 ${video.thumbnail ? "translate-y-[6%]" : ""}`}
           >
             <span className="grid h-16 w-16 place-items-center rounded-full bg-navy/90 text-white shadow-lift transition-transform duration-200 group-hover:scale-105 sm:h-[4.75rem] sm:w-[4.75rem]">
               <Icon name="play" className="ml-1 h-6 w-6 sm:h-7 sm:w-7" />
             </span>
-            <span className="flex flex-col items-center px-4 text-center">
+            <span
+              className={`flex flex-col items-center px-4 text-center ${video.thumbnail ? "sr-only" : ""}`}
+            >
               <span className="text-[0.9375rem] font-bold text-navy sm:text-base">{label}</span>
               {video.duration ? (
                 <span className="mt-0.5 text-[0.8125rem] text-navy/60">{video.duration}</span>

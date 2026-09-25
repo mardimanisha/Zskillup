@@ -273,7 +273,7 @@ export const institutions = {
       focus: "Resume building, mock interviews, professional etiquette and workplace preparation.",
     },
   ],
-  programsCta: { label: "Request a Customised Program", href: "#partner-with-us" },
+  programsCta: { label: "Request a Customised Program", href: "#enquire-institutions" },
 
   methodEyebrow: "A Proven Journey",
   methodHeadline: "Designed around your institution.",

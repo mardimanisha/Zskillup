@@ -23,6 +23,8 @@ export type VideoSource = {
   title: string;
   /** Shown beside the play control. */
   duration?: string;
+  /** Cover artwork under /public. It carries its own title and duration text. */
+  thumbnail?: string;
 };
 
 export const videos: Record<"institutions" | "prephasz" | "commerce", VideoSource> = {
@@ -34,6 +36,7 @@ export const videos: Record<"institutions" | "prephasz" | "commerce", VideoSourc
     url: "/videos/prephasz-tour.mp4",
     title: "Watch prephasz in action",
     duration: "2 min",
+    thumbnail: "/images/prephasz-thumbnail.jpeg",
   },
   commerce: {
     url: null,

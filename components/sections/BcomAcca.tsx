@@ -184,8 +184,25 @@ export function BcomAcca() {
           </div>
         </div>
 
-        {/* 5. Career possibilities - directions, never promised outcomes. */}
-        <div className="mt-14 rounded-card bg-[#eef3fa] p-7 sm:p-9">
+        {/* 5. CTAs - Explore serves visitors who need more information first;
+            Talk to a Career Advisor opens the enquiry route for high-intent
+            users. Nobody is asked to fill in a form immediately. */}
+        <div className="mt-14 flex flex-wrap items-center gap-4">
+          <Button href={commerce.primaryCta.href} variant="vertical" tone="commerce" size="lg">
+            {commerce.primaryCta.label}
+          </Button>
+          <Button
+            href={commerce.secondaryCta.href}
+            variant="outlineTone"
+            tone="commerce"
+            size="lg"
+          >
+            {commerce.secondaryCta.label}
+          </Button>
+        </div>
+
+        {/* 6. Career possibilities - directions, never promised outcomes. */}
+        <div className="mt-10 rounded-card bg-[#eef3fa] p-7 sm:p-9">
           <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-10">
             <div className="lg:col-span-4">
               <h3 className="text-[1.375rem] font-extrabold text-navy sm:text-[1.6rem]">
@@ -212,23 +229,6 @@ export function BcomAcca() {
               ))}
             </ul>
           </div>
-        </div>
-
-        {/* 6. CTAs - Explore serves visitors who need more information first;
-            Talk to a Career Advisor opens the enquiry route for high-intent
-            users. Nobody is asked to fill in a form immediately. */}
-        <div className="mt-10 flex flex-wrap items-center gap-4">
-          <Button href={commerce.primaryCta.href} variant="vertical" tone="commerce" size="lg">
-            {commerce.primaryCta.label}
-          </Button>
-          <Button
-            href={commerce.secondaryCta.href}
-            variant="outlineTone"
-            tone="commerce"
-            size="lg"
-          >
-            {commerce.secondaryCta.label}
-          </Button>
         </div>
       </Container>
     </Section>

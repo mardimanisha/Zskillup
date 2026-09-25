@@ -137,7 +137,7 @@ export const heroCredibilityStats: readonly (Stat & {
 export const institutionStats: readonly Stat[] = [
   { value: "55+", label: "Partner Institutions", verified: true },
   { value: "1 lakh+", label: "Students Trained", verified: true },
-  { value: "250+", label: "Placement Readiness Verified", verified: true },
+  { value: "78%", label: "Placement Success Rate", verified: true },
 ];
 
 /**
@@ -152,8 +152,7 @@ export const institutionStats: readonly Stat[] = [
  * them and no number has been invented to fill the gap.
  */
 export const activityStats: readonly Stat[] = [
-  { value: "50+", label: "Programs Conducted", verified: false, note: "From the design. Confirm." },
-  { value: "100+", label: "Workshops & Events", verified: false, note: "From the design. Confirm." },
-  { value: "15+", label: "Cities &\nCampuses Reached", verified: false, note: "From the design. Confirm." },
-  { value: "Growing", label: "Student Community", verified: true },
+  { value: "100+", label: "Programs Conducted", verified: true },
+  { value: "150+", label: "Workshops & Events", verified: true },
+  { value: "55+", label: "Cities &\nCampuses Reached", verified: true },
 ];
