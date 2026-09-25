@@ -17,7 +17,8 @@ import { supabase } from "@/lib/supabase";
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const isLoginPage = pathname === "/admin/login";
+  // next.config.ts sets trailingSlash: true, so the pathname is "/admin/login/".
+  const isLoginPage = pathname.replace(/\/$/, "") === "/admin/login";
 
   const [session, setSession] = useState<Session | null | undefined>(undefined);
 
