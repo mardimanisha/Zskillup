@@ -26,6 +26,7 @@ export type DbBlogPost = {
   author_name: string;
   author_avatar: string | null;
   cover_image: string | null;
+  images: string[] | null;
   featured: boolean;
   sections: BlogSection[];
   created_at: string;
@@ -80,6 +81,7 @@ export function mapBlogPost(row: DbBlogPost): AdminBlogPost {
     readTime: row.read_time,
     author: { name: row.author_name, avatar: row.author_avatar ?? undefined },
     coverImage: row.cover_image ?? undefined,
+    images: row.images ?? [],
     featured: row.featured,
     sections: row.sections ?? [],
   };

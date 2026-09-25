@@ -40,6 +40,7 @@ create table if not exists public.blog_posts (
   author_name text not null,
   author_avatar text,
   cover_image text,
+  images jsonb not null default '[]',
   featured boolean not null default false,
   sections jsonb not null default '[]',
   created_at timestamptz not null default now(),

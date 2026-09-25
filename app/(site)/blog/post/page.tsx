@@ -314,6 +314,26 @@ function BlogPostContent() {
             </div>
           )}
 
+          {/* Additional images added in the admin panel */}
+          {(post.images?.length ?? 0) > 0 && (
+            <div className="mx-auto mt-12 max-w-3xl">
+              <div className="grid gap-4 sm:grid-cols-2">
+                {post.images!.map((src, i) => (
+                  <div key={`${src}-${i}`} className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
+                    <Image
+                      src={src}
+                      alt={`${post.title} — image ${i + 1}`}
+                      fill
+                      sizes="(min-width: 768px) 384px, 100vw"
+                      className="object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Back CTA */}
           <div className="mt-16 flex justify-center">
             <Link

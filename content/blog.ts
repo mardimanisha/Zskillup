@@ -41,6 +41,7 @@ export type BlogPost = {
   readTime: number;
   author: { name: string; avatar?: string };
   coverImage?: string;
+  images?: string[];
   featured?: boolean;
   sections?: BlogSection[];
 };

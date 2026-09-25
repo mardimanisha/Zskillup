@@ -19,6 +19,7 @@ type FormState = {
   authorName: string;
   authorAvatar: string;
   coverImage: string;
+  images: string[];
   featured: boolean;
   sections: BlogSection[];
 };
@@ -34,6 +35,7 @@ const emptyForm: FormState = {
   authorName: "",
   authorAvatar: "",
   coverImage: "",
+  images: [],
   featured: false,
   sections: [],
 };
@@ -50,6 +52,7 @@ function toForm(post: AdminBlogPost): FormState {
     authorName: post.author.name,
     authorAvatar: post.author.avatar ?? "",
     coverImage: post.coverImage ?? "",
+    images: [...(post.images ?? [])],
     featured: post.featured ?? false,
     sections: post.sections ?? [],
   };
@@ -104,6 +107,12 @@ export default function AdminBlogPage() {
     await load();
   };
 
+  const updateImage = (i: number, url: string) => {
+    setForm((f) => ({ ...f, images: f.images.map((p, idx) => (idx === i ? url : p)) }));
+  };
+  const addImage = () => setForm((f) => ({ ...f, images: [...f.images, ""] }));
+  const removeImage = (i: number) => setForm((f) => ({ ...f, images: f.images.filter((_, idx) => idx !== i) }));
+
   const updateSection = (i: number, patch: Partial<BlogSection>) => {
     setForm((f) => ({
       ...f,
@@ -147,6 +156,7 @@ export default function AdminBlogPage() {
       author_name: form.authorName.trim(),
       author_avatar: form.authorAvatar.trim() || null,
       cover_image: form.coverImage.trim() || null,
+      images: form.images.map((p) => p.trim()).filter(Boolean),
       featured: form.featured,
       sections: form.sections
         .filter((s) => s.heading.trim() || s.body.trim())
@@ -300,6 +310,28 @@ export default function AdminBlogPage() {
           <AdminFormField label="Cover image">
             <ImageUrlField value={form.coverImage} onChange={(url) => setForm((f) => ({ ...f, coverImage: url }))} />
           </AdminFormField>
+
+          <div>
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-neutral-800">Additional images</h3>
+              <button type="button" onClick={addImage} className="text-sm font-medium text-neutral-700 hover:underline">
+                + Add image
+              </button>
+            </div>
+
+            <div className="mt-3 space-y-3">
+              {form.images.map((image, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <div className="flex-1">
+                    <ImageUrlField value={image} onChange={(url) => updateImage(i, url)} />
+                  </div>
+                  <button type="button" onClick={() => removeImage(i)} className="mt-2 text-xs text-red-600 hover:underline">
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
 
           <label className="flex items-center gap-2 text-sm font-medium text-neutral-700">
             <input
