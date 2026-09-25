@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/**
+ * Admin panel's own stylesheet. Deliberately separate from
+ * app/(site)/globals.css - the admin panel is an internal tool with its own
+ * root layout (see app/admin/layout.tsx) and does not need to match the
+ * marketing site's design system, fonts or tokens. Tailwind utility classes
+ * are still available since this file imports "tailwindcss" itself.
+ */
+
+body.admin-body {
+  background: #f4f5f7;
+  color: #1a1f2b;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}

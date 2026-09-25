@@ -194,7 +194,7 @@ export function Hero() {
                   </span>
                 </h1>
 
-                <p className="mt-6 max-w-[46ch] text-[1.0625rem] font-medium text-navy/85 drop-shadow-[0_1px_4px_rgba(255,255,255,0.75)] sm:text-lg">
+                <p className="mt-6 max-w-[46ch] text-[1.0625rem] font-medium text-navy/85 drop-shadow-[0_1px_4px_rgba(255,255,255,0.75)] sm:text-lg md:max-w-none md:whitespace-nowrap">
                   {hero.supporting}
                 </p>
 

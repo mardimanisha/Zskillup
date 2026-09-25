@@ -67,6 +67,7 @@ export function InstitutionEnquiryForm({ idPrefix }: { idPrefix: string }) {
       requireText(data, "institutionName", "Please enter your institution's name.", errors);
       requireText(data, "contactName", "Please enter a contact person.", errors);
       requireEmail(data, errors);
+      requireText(data, "phone", "Please enter a phone number.", errors);
       requireText(data, "institutionType", "Please select an institution type.", errors);
       return errors;
     },
@@ -117,7 +118,15 @@ export function InstitutionEnquiryForm({ idPrefix }: { idPrefix: string }) {
           required
           error={errors.email}
         />
-        <TextField idPrefix={idPrefix} name="phone" label="Phone number" type="tel" autoComplete="tel" optional />
+        <TextField
+          idPrefix={idPrefix}
+          name="phone"
+          label="Phone number"
+          type="tel"
+          autoComplete="tel"
+          required
+          error={errors.phone}
+        />
         <SelectField
           idPrefix={idPrefix}
           name="institutionType"
@@ -187,7 +196,8 @@ export function PrephaszEnquiryForm({ idPrefix }: { idPrefix: string }) {
       const errors: Record<string, string> = {};
       requireText(data, "name", "Please enter your name.", errors);
       requireEmail(data, errors);
-      requireText(data, "role", "Please tell us who you are.", errors);
+      requireText(data, "phone", "Please enter a phone number.", errors);
+      requireText(data, "role","Please tell us who you are.", errors);
       return errors;
     },
     subject: (data) => `prephasz enquiry - ${data.name}`,
@@ -226,7 +236,15 @@ export function PrephaszEnquiryForm({ idPrefix }: { idPrefix: string }) {
           required
           error={errors.email}
         />
-        <TextField idPrefix={idPrefix} name="phone" label="Phone number" type="tel" autoComplete="tel" optional />
+        <TextField
+          idPrefix={idPrefix}
+          name="phone"
+          label="Phone number"
+          type="tel"
+          autoComplete="tel"
+          required
+          error={errors.phone}
+        />
         <SelectField
           idPrefix={idPrefix}
           name="role"

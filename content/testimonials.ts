@@ -38,6 +38,12 @@ export type Testimonial = {
   category: string;
   vertical: Vertical;
   quote: string;
+  /**
+   * Direct photo URL (Supabase Storage public URL, or any absolute URL).
+   * Replaces the old `learnerPhoto(slug, name)` indirection from
+   * content/media.ts - DB-backed testimonials carry their own photo.
+   */
+  photoUrl?: string;
 };
 
 export const testimonialsIntro = {

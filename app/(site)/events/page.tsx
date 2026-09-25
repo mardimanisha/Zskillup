@@ -1,26 +1,63 @@
-import type { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { asset } from "@/lib/asset";
-import {
-  badgeColors,
-  badgeLabels,
-  featuredEvents,
-  galleryPhotos,
-  inAction,
-} from "@/content/events";
+import { badgeColors, badgeLabels, inAction, type Photo } from "@/content/events";
+import { mapEvent } from "@/lib/db-types";
+import { supabase } from "@/lib/supabase";
 import { Icon } from "@/components/ui/Icon";
-import { Container, Eyebrow, Heading, Section } from "@/components/ui/Section";
-
-export const metadata: Metadata = {
-  title: "Events & Moments",
-  description:
-    "A glimpse of ZSkillup in action — across campuses, classrooms, industry interactions and community events.",
-  alternates: { canonical: "/events" },
-};
-
-const featured = featuredEvents[0];
+import { Container, Section } from "@/components/ui/Section";
 
 export default function EventsPage() {
+  const [featured, setFeatured] = useState<Photo | null>(null);
+  const [gallery, setGallery] = useState<Photo[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    supabase
+      .from("events")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .then(({ data, error }) => {
+        if (cancelled) return;
+        if (error || !data) {
+          setLoading(false);
+          return;
+        }
+        const rows = data.map(mapEvent);
+        const featuredRows = rows.filter((r) => r.isFeatured);
+        const galleryRows = rows.filter((r) => !r.isFeatured);
+        setFeatured(featuredRows[0] ?? rows[0] ?? null);
+        setGallery(galleryRows.length > 0 ? galleryRows : rows.slice(1));
+        setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (loading) {
+    return (
+      <Section tone="white">
+        <Container>
+          <p className="py-20 text-center text-[0.9375rem] text-muted">Loading events…</p>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (!featured) {
+    return (
+      <Section tone="white">
+        <Container>
+          <p className="py-20 text-center text-[0.9375rem] text-muted">No events yet. Check back soon.</p>
+        </Container>
+      </Section>
+    );
+  }
+
   return (
     <>
       {/* Hero: Featured Event */}
@@ -122,11 +159,11 @@ export default function EventsPage() {
           </h2>
 
           <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {galleryPhotos.map((photo) => {
+            {gallery.map((photo) => {
               const badgeColor = badgeColors[photo.category] ?? "bg-brand-soft text-brand";
               const badgeLabel = badgeLabels[photo.category] ?? photo.category;
               return (
-                <li key={photo.src}>
+                <li key={photo.slug}>
                   <article className="group overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-navy/5 transition-shadow hover:shadow-md">
                     <div className="relative aspect-[16/9] overflow-hidden">
                       <Image
@@ -156,7 +193,7 @@ export default function EventsPage() {
                           {badgeLabel}
                         </span>
                         <a
-                          href={`/events/${photo.slug}`}
+                          href={`/events/post?slug=${photo.slug}`}
                           className="flex items-center gap-1 text-[0.8125rem] font-semibold text-brand hover:underline"
                         >
                           View Album

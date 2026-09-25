@@ -88,7 +88,7 @@
   --brand-gradient-icon: linear-gradient(140deg, #6b3fd6 0%, #a24fb8 55%, #e8776a 100%);
 
   scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 4.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

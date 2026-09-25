@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { journey } from "@/content/homepage";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { PrephaszWordmark } from "@/components/ui/Brand";
@@ -35,6 +35,23 @@ const solutionExpandedWidth: Record<string, string> = {
 
 export function FloatingEnquiryButtons() {
   const dialogRefs = useRef<(HTMLDialogElement | null)[]>([]);
+
+  // Any link to "#enquire-<vertical>" (e.g. the hero cards' "Partner With Us")
+  // opens that vertical's dialog, same as its floating button. Delegated so
+  // server-rendered links need no client wrapper, and it works on every click.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const link = (e.target as Element | null)?.closest<HTMLAnchorElement>('a[href^="#enquire-"]');
+      if (!link) return;
+      const vertical = link.getAttribute("href")!.slice("#enquire-".length);
+      const i = journey.solutions.findIndex((s) => s.vertical === vertical);
+      if (i === -1) return;
+      e.preventDefault();
+      dialogRefs.current[i]?.showModal();
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
 
   return (
     <div className="fixed right-4 bottom-6 z-40 flex flex-col items-end gap-3 sm:right-6 sm:bottom-8">

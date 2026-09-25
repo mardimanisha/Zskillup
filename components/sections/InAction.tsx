@@ -1,20 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { asset } from "@/lib/asset";
 import {
   badgeColors,
   badgeLabels,
-  featuredEvents,
   galleryFilters,
-  galleryPhotos,
   inAction,
   type GalleryCategory,
+  type Photo,
 } from "@/content/events";
+import { mapEvent } from "@/lib/db-types";
+import { supabase } from "@/lib/supabase";
 import { activityStats, publishable } from "@/content/stats";
 import { Icon, type IconName } from "@/components/ui/Icon";
-import { Container, Eyebrow, Heading, Lede, Section } from "@/components/ui/Section";
+import { Container, Eyebrow, Heading, Section } from "@/components/ui/Section";
 
 /**
  * 10 - ZSKILLUP IN ACTION
@@ -49,11 +50,33 @@ export function InAction() {
     filterRef.current?.scrollBy({ left: dir * 200, behavior: "smooth" });
   const stats = publishable(activityStats);
 
+  const [featuredEvents, setFeaturedEvents] = useState<Photo[]>([]);
+  const [galleryPhotos, setGalleryPhotos] = useState<Photo[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    supabase
+      .from("events")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .then(({ data, error }) => {
+        if (cancelled || error || !data) return;
+        const rows = data.map(mapEvent);
+        const featuredRows = rows.filter((r) => r.isFeatured);
+        const galleryRows = rows.filter((r) => !r.isFeatured);
+        setFeaturedEvents(featuredRows.length > 0 ? featuredRows : rows.slice(0, 1));
+        setGalleryPhotos(galleryRows.length > 0 ? galleryRows : rows.slice(1));
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const visible =
     filter === "all" ? galleryPhotos : galleryPhotos.filter((p) => p.category === filter);
 
   const go = (dir: -1 | 1) =>
-    setFeatured((i) => (i + dir + featuredEvents.length) % featuredEvents.length);
+    setFeatured((i) => (featuredEvents.length === 0 ? 0 : (i + dir + featuredEvents.length) % featuredEvents.length));
 
   return (
     <Section id="in-action" tone="lavender" labelledBy="in-action-heading" className="relative overflow-hidden">

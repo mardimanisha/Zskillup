@@ -80,7 +80,7 @@ export function InstitutionsTabs() {
   return (
     <div
       id="institution-programs"
-      className="scroll-mt-24 overflow-hidden rounded-[1.5rem] border border-[#ece8f7] bg-white shadow-[0_1px_2px_rgba(60,40,120,0.04),0_24px_60px_-28px_rgba(60,40,120,0.22)] sm:rounded-[1.75rem]"
+      className="scroll-mt-4 overflow-hidden rounded-[1.5rem] border border-[#ece8f7] bg-white shadow-[0_1px_2px_rgba(60,40,120,0.04),0_24px_60px_-28px_rgba(60,40,120,0.22)] sm:rounded-[1.75rem]"
     >
       <div
         role="tablist"

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { institutions } from "@/content/homepage";
 import { institutionStats, publishable } from "@/content/stats";
 import { Icon } from "@/components/ui/Icon";
@@ -47,7 +46,7 @@ export function Institutions() {
   // The band's bottom padding matches what this section had before (only the
   // bottom is trimmed) so the gap to the prephasz section below is unchanged.
   return (
-    <section id="institutions" aria-labelledby="institutions-heading" className="scroll-mt-24">
+    <section id="institutions" aria-labelledby="institutions-heading" className="scroll-mt-0">
       {/* === A. Hero band + tabbed panel ================================= */}
       <div className="bg-white pt-6 pb-8 sm:pb-10">
         <Container className="relative">
@@ -70,13 +69,13 @@ export function Institutions() {
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4 lg:mt-9">
-                <Link href={institutions.primaryCta.href} className={primaryCta}>
+                <a href={institutions.primaryCta.href} className={primaryCta}>
                   <span>{institutions.primaryCta.label}</span>
                   <Icon
                     name="arrowRight"
                     className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
-                </Link>
+                </a>
               </div>
             </div>
 
@@ -118,7 +117,7 @@ export function Institutions() {
               <p className="relative mt-5 mb-9 max-w-[16ch] text-[1.125rem] leading-snug text-white/90 sm:text-[1.25rem]">
                 {institutions.finalCta.body}
               </p>
-              <Link
+              <a
                 href={institutions.programsCta.href}
                 className="group relative mt-auto inline-flex min-h-14 items-center justify-center gap-2.5 self-start rounded-full bg-white px-6 py-3 text-center text-[0.9375rem] leading-snug font-semibold text-navy shadow-[0_14px_28px_-14px_rgba(20,10,80,0.55)] transition-colors duration-200 hover:bg-[#f6f2ff]"
               >
@@ -127,7 +126,7 @@ export function Institutions() {
                   name="arrowRight"
                   className="h-[1.1rem] w-[1.1rem] text-inst transition-transform duration-200 group-hover:translate-x-0.5"
                 />
-              </Link>
+              </a>
             </aside>
           </div>
         </Container>

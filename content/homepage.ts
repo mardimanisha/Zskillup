@@ -26,7 +26,7 @@ export const hero = {
     plain: "Degrees create graduates.",
     gradient: "We help create industry\nready professionals.",
   },
-  supporting: "Real skills. Practical exposure. Global opportunities.",
+  supporting: "Real skills. Practical exposure. AI-enabled learning. Global opportunities.",
   /** Scrolls straight to Choose Your Route. "Programs" is no longer an architecture term. */
   cta: { label: "Explore What We Offer", href: "#choose-your-route" },
   /** Handwritten accent 1 of 2 on the homepage. */
@@ -69,7 +69,7 @@ export const heroCards: readonly HeroCard[] = [
     brandLabel: "Tech and Management",
     description: "Build employability into the student journey.",
     primary: { label: "Explore", href: "#institutions" },
-    secondary: { label: "Partner With Us", href: "#partner-with-us" },
+    secondary: { label: "Partner With Us", href: "#enquire-institutions" },
     video: { label: "Watch Now", href: "#institutions" },
   },
   {
@@ -78,17 +78,17 @@ export const heroCards: readonly HeroCard[] = [
     brandLabel: "prephasz",
     description: "Stop guessing what to prepare next.",
     primary: { label: "Explore", href: "#prephasz" },
-    secondary: { label: "Get Started", href: "#partner-with-us" },
+    secondary: { label: "Get Started", href: "https://prephasz.com/" },
     video: { label: "Watch Now", href: "#prephasz" },
   },
   {
     vertical: "commerce",
     eyebrow: "For Global Finance Careers",
     /** "For Commerce Careers" alone does not tell a new visitor what the offering is. */
-    brandLabel: "Global Finance & AI",
+    brandLabel: "Commerce",
     description: "Future-Ready. AI-Enabled. Globally Employable.",
     primary: { label: "Explore", href: "#bcom-acca" },
-    secondary: { label: "Talk to an Advisor", href: "#partner-with-us" },
+    secondary: { label: "Talk to an Advisor", href: "#enquire-commerce" },
     video: { label: "Watch Now", href: "#bcom-acca" },
   },
 ];

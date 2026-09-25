@@ -3,8 +3,10 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { asset } from "@/lib/asset";
-import { initials, learnerPhoto } from "@/content/media";
-import { testimonials, testimonialsIntro } from "@/content/testimonials";
+import { initials } from "@/content/media";
+import { testimonialsIntro, type Testimonial } from "@/content/testimonials";
+import { mapTestimonial } from "@/lib/db-types";
+import { supabase } from "@/lib/supabase";
 import { Container, Eyebrow, Heading, Lede, Section } from "@/components/ui/Section";
 
 /**
@@ -50,6 +52,22 @@ export function Testimonials() {
   const trackRef = useRef<HTMLUListElement>(null);
   const [duration, setDuration] = useState(60);
   const [tapPaused, setTapPaused] = useState(false);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    supabase
+      .from("testimonials")
+      .select("*")
+      .order("sort_order", { ascending: true })
+      .then(({ data, error }) => {
+        if (cancelled || error || !data) return;
+        setTestimonials(data.map(mapTestimonial));
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     const el = trackRef.current;
@@ -79,7 +97,7 @@ export function Testimonials() {
   const renderCards = (copy: "original" | "clone") =>
     testimonials.map((t) => {
       const tint = cardTints[t.vertical];
-      const photo = learnerPhoto(t.slug, t.name);
+      const photo = t.photoUrl ? { src: t.photoUrl, alt: `Portrait of ${t.name}`, width: 256, height: 256 } : null;
       return (
         <li
           key={`${copy}-${t.slug}`}

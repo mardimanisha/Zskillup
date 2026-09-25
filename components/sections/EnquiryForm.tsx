@@ -51,6 +51,7 @@ export function EnquiryForm({
       if (!data.email?.trim()) next.email = "Please enter your email address.";
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email))
         next.email = "Please enter a valid email address.";
+      if (!data.phone?.trim()) next.phone = "Please enter a phone number.";
       if (!data.audience) next.audience = "Please tell us who you are enquiring as.";
       return next;
     },
@@ -104,7 +105,8 @@ export function EnquiryForm({
           label="Phone number"
           type="tel"
           autoComplete="tel"
-          optional
+          required
+          error={errors.phone}
         />
         <TextField
           idPrefix={idPrefix}

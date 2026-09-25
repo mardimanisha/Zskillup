@@ -50,7 +50,7 @@ export function Leadership() {
     <section
       id="about"
       aria-labelledby="leadership-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-[linear-gradient(to_bottom,#ffffff_0%,#f7f5fd_20%,#f7f5fd_80%,#ffffff_100%)] pb-10 pt-6 sm:pb-12 sm:pt-8 lg:pb-14 lg:pt-10"
+      className="relative scroll-mt-0 overflow-hidden bg-[linear-gradient(to_bottom,#ffffff_0%,#f7f5fd_20%,#f7f5fd_80%,#ffffff_100%)] pb-10 pt-6 sm:pb-12 sm:pt-8 lg:pb-14 lg:pt-10"
     >
       {/* Decorative organic shapes - purely tonal, no new colours. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">

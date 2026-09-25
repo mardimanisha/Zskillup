@@ -108,7 +108,7 @@ export function Prephasz() {
           through and becomes space ABOVE this div instead of inside it. */}
       <div className="bg-prep-soft pt-6 pb-12 sm:pt-8 sm:pb-14 lg:pb-16">
         <Container>
-          <div id="prephasz-journey" className="scroll-mt-24">
+          <div id="prephasz-journey" className="scroll-mt-0">
             <JourneyEyebrow>{prephasz.journeyEyebrow}</JourneyEyebrow>
             <h3 className="mt-4 text-[1.625rem] leading-[1.1] font-extrabold tracking-[-0.035em] sm:text-[2.1rem] lg:text-[2.35rem]">
               {prephasz.journeyHeadline}

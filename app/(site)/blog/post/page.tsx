@@ -1,24 +1,24 @@
-import type { Metadata } from "next";
-import { Fragment } from "react";
-import { notFound } from "next/navigation";
+"use client";
+
+import { Fragment, Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { blogPosts, categoryColors } from "@/content/blog";
+import { useSearchParams } from "next/navigation";
+import { categoryColors, type BlogPost } from "@/content/blog";
+import { mapBlogPost } from "@/lib/db-types";
+import { supabase } from "@/lib/supabase";
 import { Icon } from "@/components/ui/Icon";
 import { Container, Section } from "@/components/ui/Section";
 
-type Props = { params: Promise<{ slug: string }> };
-
-export async function generateStaticParams() {
-  return blogPosts.map((p) => ({ slug: p.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
-  if (!post) return {};
-  return { title: post.title, description: post.excerpt };
-}
+/**
+ * Blog detail page, read via ?slug= instead of a [slug] path segment.
+ *
+ * `output: "export"` requires every path segment to be resolvable at build
+ * time (generateStaticParams). Admin-added posts don't exist at build time,
+ * so a dynamic path segment is incompatible with "no rebuild to publish a
+ * new post" - hence a static route reading the slug from the query string
+ * and fetching client-side instead. See AGENTS.md / the admin panel brief.
+ */
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-IN", {
@@ -41,10 +41,111 @@ function firstSentence(body: string) {
   return (match ? match[0] : body).trim();
 }
 
-export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
-  if (!post) notFound();
+export default function BlogPostPage() {
+  return (
+    <Suspense
+      fallback={
+        <Section tone="white">
+          <Container>
+            <p className="py-20 text-center text-[0.9375rem] text-muted">Loading article…</p>
+          </Container>
+        </Section>
+      }
+    >
+      <BlogPostContent />
+    </Suspense>
+  );
+}
+
+function BlogPostContent() {
+  const searchParams = useSearchParams();
+  const slug = searchParams.get("slug");
+
+  const [post, setPost] = useState<BlogPost | null | undefined>(undefined);
+  const [related, setRelated] = useState<BlogPost[]>([]);
+
+  useEffect(() => {
+    if (!slug) return;
+    let cancelled = false;
+
+    supabase
+      .from("blog_posts")
+      .select("*")
+      .eq("slug", slug)
+      .maybeSingle()
+      .then(async ({ data, error }) => {
+        if (cancelled) return;
+        if (error || !data) {
+          setPost(null);
+          return;
+        }
+        const mapped = mapBlogPost(data);
+        setPost(mapped);
+        document.title = mapped.title;
+
+        const { data: relatedData } = await supabase
+          .from("blog_posts")
+          .select("*")
+          .eq("category", mapped.category)
+          .neq("slug", mapped.slug)
+          .limit(3);
+        if (!cancelled) {
+          setRelated((relatedData ?? []).map(mapBlogPost));
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
+
+  if (!slug) {
+    return (
+      <Section tone="white">
+        <Container>
+          <div className="py-20 text-center">
+            <p className="text-[0.9375rem] text-muted">This article could not be found.</p>
+            <Link
+              href="/blog"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-navy/20 px-7 py-3 text-[0.9375rem] font-semibold text-navy transition-colors hover:border-navy/40"
+            >
+              <Icon name="chevronLeft" className="h-4 w-4" />
+              Back to All Insights
+            </Link>
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (post === undefined) {
+    return (
+      <Section tone="white">
+        <Container>
+          <p className="py-20 text-center text-[0.9375rem] text-muted">Loading article…</p>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (post === null) {
+    return (
+      <Section tone="white">
+        <Container>
+          <div className="py-20 text-center">
+            <p className="text-[0.9375rem] text-muted">This article could not be found.</p>
+            <Link
+              href="/blog"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-navy/20 px-7 py-3 text-[0.9375rem] font-semibold text-navy transition-colors hover:border-navy/40"
+            >
+              <Icon name="chevronLeft" className="h-4 w-4" />
+              Back to All Insights
+            </Link>
+          </div>
+        </Container>
+      </Section>
+    );
+  }
 
   const pillStyle = categoryColors[post.category] ?? "bg-brand-soft text-brand";
 
@@ -58,11 +159,6 @@ export default async function BlogPostPage({ params }: Props) {
     .filter((s) => s.image)
     .slice(0, 3)
     .map((s) => ({ src: s.image!, alt: s.imageAlt ?? s.heading }));
-
-  /* Related posts — same category, exclude current */
-  const related = blogPosts
-    .filter((p) => p.slug !== post.slug && p.category === post.category)
-    .slice(0, 3);
 
   return (
     <>
@@ -233,7 +329,7 @@ export default async function BlogPostPage({ params }: Props) {
               {related.map((p) => (
                 <Link
                   key={p.slug}
-                  href={`/blog/${p.slug}`}
+                  href={`/blog/post?slug=${p.slug}`}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition-shadow hover:shadow-card"
                 >
                   <div className="relative h-44 w-full overflow-hidden bg-[#eef0fc]">

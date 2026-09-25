@@ -145,6 +145,15 @@ export function Button(props: AnchorProps | NativeButtonProps) {
         </a>
       );
     }
+    // In-page anchors use a native <a>: next/link skips the scroll when the
+    // hash already matches the URL, so repeat clicks would do nothing.
+    if (props.href.startsWith("#")) {
+      return (
+        <a className={cls} href={props.href}>
+          {body}
+        </a>
+      );
+    }
     return (
       <Link className={cls} href={props.href}>
         {body}
