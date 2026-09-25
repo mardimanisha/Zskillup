@@ -177,7 +177,10 @@ export function HomepageStats() {
         setInView(true);
         observer.disconnect();
       },
-      { threshold: 0.3 },
+      // A ratio threshold can never be met when the strip is taller than the
+      // viewport (stacked 2-column mobile layout), leaving figures stuck at 0.
+      // Fire as soon as any part is inside a slightly inset viewport instead.
+      { threshold: 0, rootMargin: "0px 0px -15% 0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();

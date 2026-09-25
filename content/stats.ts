@@ -92,31 +92,31 @@ export const heroCredibilityStats: readonly (Stat & {
 })[] = [
   {
     value: "55+",
-    label: "Universities & Colleges onboarded",
+    label: "University Partners",
     verified: true,
     image: { src: "/images/stats/universities-colleges.png", width: 455, height: 451 },
   },
   {
-    value: "150+",
+    value: "180+",
     label: "Hiring Partners",
     verified: true,
     image: { src: "/images/stats/hiring-partners.png", width: 453, height: 452 },
   },
   {
-    value: "350+",
+    value: "5000+",
     label: "Placements",
     verified: true,
     image: { src: "/images/stats/placements.png", width: 453, height: 453 },
     highlight: true,
   },
   {
-    value: "19 LPA",
+    value: "21 LPA",
     label: "Highest Package",
     verified: true,
     image: { src: "/images/stats/highest-package.png", width: 461, height: 453 },
   },
   {
-    value: "5.6 LPA",
+    value: "5.9 LPA",
     label: "Average Package",
     verified: true,
     image: { src: "/images/stats/average-package.png", width: 462, height: 451 },

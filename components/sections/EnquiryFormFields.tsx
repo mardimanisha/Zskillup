@@ -101,11 +101,11 @@ export function useEnquirySubmit({
 
 const labelCls = "flex items-end text-[0.9375rem] font-semibold text-navy sm:min-h-[2.5rem]";
 const inputCls =
-  "mt-2 w-full rounded-tile border bg-cloud px-4 py-3 text-[0.9375rem] text-navy outline-none focus:border-brand/50";
+  "mt-2 w-full rounded-tile border bg-cloud px-4 py-3 text-[0.9375rem] text-navy outline-none focus:border-[var(--form-accent,var(--color-brand))]";
 const errorCls = "mt-1.5 text-[0.8125rem] text-[#c0392b]";
 
 function RequiredOrOptional({ required, optional }: { required?: boolean; optional?: boolean }) {
-  if (required) return <span className="text-brand">*</span>;
+  if (required) return <span className="text-[var(--form-ink,var(--color-brand))]">*</span>;
   if (optional) return <span className="font-normal text-muted">(optional)</span>;
   return null;
 }
@@ -269,7 +269,7 @@ export function PillGroupField({
         {options.map((option) => (
           <label
             key={option.value}
-            className="cursor-pointer rounded-full border border-line px-4 py-2.5 text-[0.9375rem] text-body transition-colors has-[:checked]:border-brand/40 has-[:checked]:bg-brand-soft has-[:checked]:font-semibold has-[:checked]:text-navy"
+            className="cursor-pointer rounded-full border border-line px-4 py-2.5 text-[0.9375rem] text-body transition-colors has-[:checked]:border-[var(--form-accent,var(--color-brand))] has-[:checked]:bg-[var(--form-soft,var(--color-brand-soft))] has-[:checked]:font-semibold has-[:checked]:text-navy"
           >
             <input
               type={kind}
@@ -294,7 +294,7 @@ export function PillGroupField({
 export function EnquirySuccess({ message, onReset }: { message: string; onReset: () => void }) {
   return (
     <div className="text-center">
-      <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-com-soft text-com">
+      <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-[var(--form-soft,var(--color-com-soft))] text-[var(--form-ink,var(--color-com))]">
         <Icon name="check" className="h-5 w-5" />
       </span>
       <h3 className="mt-5 text-lg font-bold text-navy">Enquiry received</h3>
@@ -302,7 +302,7 @@ export function EnquirySuccess({ message, onReset }: { message: string; onReset:
       <button
         type="button"
         onClick={onReset}
-        className="mt-5 text-[0.9375rem] font-semibold text-brand hover:underline"
+        className="mt-5 text-[0.9375rem] font-semibold text-[var(--form-ink,var(--color-brand))] hover:underline"
       >
         Send another enquiry
       </button>

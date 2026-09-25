@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { journey } from "@/content/homepage";
 import { Icon, type IconName } from "@/components/ui/Icon";
-import { PrephaszWordmark } from "@/components/ui/Brand";
+import { PrephaszLogo } from "@/components/ui/Brand";
 import { VerticalEnquiryForm } from "./VerticalEnquiryForms";
 
 /**
@@ -31,6 +31,40 @@ const solutionExpandedWidth: Record<string, string> = {
   institutions: "hover:w-56 focus-visible:w-56",
   prephasz: "hover:w-40 focus-visible:w-40",
   commerce: "hover:w-56 focus-visible:w-56",
+};
+
+/** Per-vertical branding. The dialog sets --form-* variables that the shared
+    field primitives read (focus rings, required asterisks, selected pills),
+    so each form picks up its own colour without prop-drilling. Prephasz's
+    yellow is too light for text, so its ink is the darker gold. */
+const solutionBrand: Record<string, { vars: Record<string, string>; iconChip: string }> = {
+  institutions: {
+    vars: {
+      "--form-accent": "var(--color-inst)",
+      "--form-ink": "var(--color-inst-ink)",
+      "--form-soft": "var(--color-inst-soft)",
+      "--form-line": "var(--color-inst-line)",
+    },
+    iconChip: "bg-inst-soft text-inst",
+  },
+  prephasz: {
+    vars: {
+      "--form-accent": "var(--color-prep)",
+      "--form-ink": "var(--color-prep-ink)",
+      "--form-soft": "var(--color-prep-soft)",
+      "--form-line": "var(--color-prep-line)",
+    },
+    iconChip: "bg-prep-soft text-prep-ink",
+  },
+  commerce: {
+    vars: {
+      "--form-accent": "var(--color-com)",
+      "--form-ink": "var(--color-com-ink)",
+      "--form-soft": "var(--color-com-soft)",
+      "--form-line": "var(--color-com-line)",
+    },
+    iconChip: "bg-com-soft text-com",
+  },
 };
 
 export function FloatingEnquiryButtons() {
@@ -76,39 +110,42 @@ export function FloatingEnquiryButtons() {
               dialogRefs.current[i] = el;
             }}
             aria-label={`Enquire about ${solution.title}`}
+            style={solutionBrand[solution.vertical].vars as React.CSSProperties}
             onClick={(e) => {
               if (e.target === dialogRefs.current[i]) dialogRefs.current[i]?.close();
             }}
-            className="no-scrollbar m-auto max-h-[85vh] w-[92vw] max-w-[34rem] overflow-y-auto rounded-2xl border-0 bg-cloud p-0 backdrop:bg-navy-deep/70"
+            className="no-scrollbar m-auto max-h-[85vh] w-[92vw] max-w-[34rem] overflow-y-auto rounded-2xl border-0 bg-white p-0 shadow-lift backdrop:bg-navy-deep/70"
           >
-            <div className="p-5 sm:p-6">
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-soft text-brand">
-                    <Icon name={solutionIcons[solution.vertical]} className="h-4 w-4" />
-                  </span>
-                  {solution.vertical === "prephasz" ? (
-                    <PrephaszWordmark className="text-xl" />
-                  ) : (
-                    <h2 className="text-base font-semibold text-navy">{solution.title}</h2>
-                  )}
-                </div>
-                <button
-                  type="button"
-                  onClick={() => dialogRefs.current[i]?.close()}
-                  className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line text-navy transition-colors hover:bg-cloud"
-                  aria-label="Close"
-                >
-                  <Icon name="close" className="h-4 w-4" />
-                </button>
+            {/* Branded header: tinted band, solid accent bar on top, hairline
+                below. Sticky so the close button stays reachable while the
+                form scrolls. Light tint (not a solid fill) so the prephasz
+                logo - navy word, yellow arrow - stays legible. */}
+            <header className="sticky top-0 z-10 flex items-center justify-between gap-4 border-t-4 border-b border-t-[var(--form-accent)] border-b-[var(--form-line)] bg-[var(--form-soft)] px-5 py-4 sm:px-6">
+              <div className="flex items-center gap-3">
+                <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white shadow-sm ${solutionBrand[solution.vertical].iconChip}`}>
+                  <Icon name={solutionIcons[solution.vertical]} className="h-[1.125rem] w-[1.125rem]" />
+                </span>
+                {solution.vertical === "prephasz" ? (
+                  <PrephaszLogo className="h-8" />
+                ) : (
+                  <h2 className="text-base font-semibold text-navy">{solution.title}</h2>
+                )}
               </div>
+              <button
+                type="button"
+                onClick={() => dialogRefs.current[i]?.close()}
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[var(--form-line)] bg-white text-navy transition-colors hover:bg-[var(--form-line)]"
+                aria-label="Close"
+              >
+                <Icon name="close" className="h-4 w-4" />
+              </button>
+            </header>
 
-              <div className="mt-6">
-                <VerticalEnquiryForm
-                  vertical={solution.vertical}
-                  idPrefix={`enquiry-${solution.vertical}`}
-                />
-              </div>
+            <div className="p-5 sm:p-6">
+              <VerticalEnquiryForm
+                vertical={solution.vertical}
+                idPrefix={`enquiry-${solution.vertical}`}
+              />
             </div>
           </dialog>
         </div>

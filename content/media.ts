@@ -56,28 +56,27 @@ export const media = {
   },
 
   /**
-   * Leadership portraits - keep natural and prominent. These are the square
-   * crops made by scripts/crop-leadership-portraits.py (the original <slug>.jpg
-   * files carry a baked-in white margin from the old comp).
+   * Leadership portraits - keep natural and prominent. Full-size 4:5 PNGs;
+   * the Leadership card crops them to a square with object-top.
    */
   team: {
     "lokesh-mathur": {
-      src: "/images/team/lokesh-mathur-portrait.jpg",
+      src: "/images/team/lokesh-mathur.png",
       alt: "Portrait of Lokesh Mathur, Founder and Director of ZSkillup",
-      width: 208,
-      height: 208,
+      width: 1122,
+      height: 1402,
     },
     "gaurav-singh": {
-      src: "/images/team/gaurav-singh-portrait.jpg",
+      src: "/images/team/gaurav-singh.png",
       alt: "Portrait of Gaurav Singh, Founder and Director of ZSkillup",
-      width: 208,
-      height: 208,
+      width: 1122,
+      height: 1402,
     },
     "manish-temani": {
-      src: "/images/team/manish-temani-portrait.jpg",
+      src: "/images/team/manish-temani.png",
       alt: "Portrait of Manish Temani, Director of ZSkillup",
-      width: 208,
-      height: 208,
+      width: 1122,
+      height: 1402,
     },
   },
 } satisfies Record<string, MediaAsset | Record<string, MediaAsset>>;
