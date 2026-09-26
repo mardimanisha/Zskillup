@@ -116,6 +116,7 @@ export const leadership = {
   people: [
     {
       slug: "lokesh-mathur",
+      hidden: false,
       name: "Lokesh Mathur",
       role: "Founder & Director",
       bio: "Brings over 19 years of experience in technology, education and career services. An engineering graduate with an Executive MBA from IIM Calcutta, he previously led Career Services at upGrad and drives ZSkillup's strategy and partnerships.",
@@ -123,6 +124,8 @@ export const leadership = {
     },
     {
       slug: "gaurav-singh",
+      /** Hidden for now - set to false to show this card again. */
+      hidden: true,
       name: "Gaurav Singh",
       role: "Founder & Director",
       bio: "Brings over 15 years of experience in operations, consulting and strategy. A graduate of IIT Kanpur and IIM Udaipur, he has worked with Jio, EY, KPMG and upGrad, and leads operations and strategy.",
@@ -130,6 +133,7 @@ export const leadership = {
     },
     {
       slug: "manish-temani",
+      hidden: false,
       name: "Manish Temani",
       role: "Director",
       bio: "Brings over 20 years of experience across audit, financial reporting and investment banking. A Chartered Accountant, Company Secretary and US CPA, he guides curriculum development and finance programmes.",

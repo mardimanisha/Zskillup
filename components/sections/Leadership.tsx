@@ -45,6 +45,8 @@ function LinkedInMark({ className = "h-[1.05rem] w-[1.05rem]" }: { className?: s
 
 export function Leadership() {
   const { headline, mission } = leadership;
+  const visiblePeople = leadership.people.filter((person) => !person.hidden);
+  const twoUp = visiblePeople.length === 2;
 
   return (
     <section
@@ -100,7 +102,7 @@ export function Leadership() {
               <p className="mb-8 max-w-[34rem] text-[1.0625rem] font-medium leading-[1.6] text-muted sm:text-[1.125rem]">
                 {leadership.intro}
               </p>
-              <div className="flex items-center gap-5 sm:gap-6">
+              <div className="flex items-center gap-5 sm:gap-6 xl:mt-auto xl:pb-[1.125rem]">
                 <span className="grid h-[4.5rem] w-[4.5rem] shrink-0 place-items-center rounded-full bg-[#ece7fb] text-brand shadow-[inset_0_0_0_1px_rgb(91_43_203/0.08),0_10px_24px_-14px_rgb(91_43_203/0.35)] sm:h-24 sm:w-24">
                   <Icon name="graduation" className="h-8 w-8 sm:h-10 sm:w-10" />
                 </span>
@@ -135,16 +137,16 @@ export function Leadership() {
 
             <ul
               aria-labelledby="leadership-label"
-              className="mt-6 grid gap-4 md:grid-cols-3 xl:mt-8 xl:flex-1"
+              className={`mt-6 grid gap-4 xl:mt-8 xl:flex-1 ${twoUp ? "md:grid-cols-2" : "md:grid-cols-3"}`}
             >
-              {leadership.people.map((person) => {
+              {visiblePeople.map((person) => {
                 const photo = media.team[person.slug as keyof typeof media.team];
                 return (
                   <li
                     key={person.slug}
                     className={`group flex flex-col rounded-card border border-[#ebe8f7] bg-white p-4 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-[#ded7f6] focus-within:-translate-y-1 focus-within:border-[#ded7f6] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:focus-within:translate-y-0 sm:p-[1.125rem] sm:max-md:grid sm:max-md:grid-cols-[13rem_minmax(0,1fr)] sm:max-md:gap-x-6 ${cardShadow} ${cardShadowHover}`}
                   >
-                    <div className="aspect-square overflow-hidden rounded-[0.875rem] bg-[#eeebfa] sm:max-md:self-start">
+                    <div className={`${twoUp ? "aspect-square xl:aspect-[4/3]" : "aspect-square"} overflow-hidden rounded-[0.875rem] bg-[#eeebfa] sm:max-md:self-start`}>
                       <Image
                         src={asset(photo.src)}
                         alt={photo.alt}
