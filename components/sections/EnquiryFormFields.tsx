@@ -17,6 +17,9 @@ export type Status = "idle" | "submitting" | "success" | "error";
 /** True on the GitHub Pages build, where there is no server to POST to. */
 export const STATIC_BUILD = process.env.NEXT_PUBLIC_STATIC_EXPORT === "true";
 
+/** Google Apps Script web app that appends enquiries to a Google Sheet. */
+const SHEET_URL = process.env.NEXT_PUBLIC_SHEET_URL;
+
 /** Checkbox groups repeat the same `name` for every option, so a plain
     `Object.fromEntries(new FormData(form))` would silently drop all but the
     last one - `multiFields` tells the extractor to collect and join those. */
@@ -64,9 +67,22 @@ export function useEnquirySubmit({
     setStatus("submitting");
     try {
       if (STATIC_BUILD) {
-        // GitHub Pages serves files only, so there is no endpoint to POST to.
-        // Rather than silently swallow the enquiry, hand it to the visitor's
-        // mail client fully composed. Restore the fetch below on a Node host.
+        // GitHub Pages serves files only, so there is no /api/enquiry to POST
+        // to. With a Google Sheets web app URL configured, post there (no-cors:
+        // Apps Script sends no CORS headers, so the response is unreadable);
+        // otherwise hand the enquiry to the visitor's mail client.
+        if (SHEET_URL) {
+          await fetch(SHEET_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(data),
+          });
+          setStatus("success");
+          setMessage("Thanks — we'll be in touch shortly.");
+          form.reset();
+          return;
+        }
         window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(
           subject(data),
         )}&body=${encodeURIComponent(bodyLines(data).join("\n"))}`;
