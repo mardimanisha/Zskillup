@@ -81,7 +81,7 @@ export const media = {
       alt: "Portrait of Manish Temani, Director of ZSkillup",
       width: 1122,
       height: 1402,
-      position: "50% 9%",
+      position: "50% 14.8%",
     },
   },
 } satisfies Record<string, MediaAsset | Record<string, MediaAsset>>;
