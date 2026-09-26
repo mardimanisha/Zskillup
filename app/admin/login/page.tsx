@@ -5,12 +5,12 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 /**
- * Password-only login. The admin account's email is fixed (mardimanisha101@gmail.com, or NEXT_PUBLIC_ADMIN_EMAIL if set); the password
+ * Password-only login. The admin account's email is fixed (shahu.shinde@zskillup.com, or NEXT_PUBLIC_ADMIN_EMAIL if set); the password
  * itself is checked by Supabase Auth (set it in Dashboard -> Authentication ->
  * Users), never stored in env - in a static export every NEXT_PUBLIC_* value
  * ships to the browser, and Supabase needs a real session to allow writes.
  */
-const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "mardimanisha101@gmail.com";
+const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "shahu.shinde@zskillup.com";
 
 export default function AdminLoginPage() {
   const router = useRouter();
