@@ -30,8 +30,8 @@ export const contact = {
 
 export const social = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/zskillup", icon: "linkedin" },
-  { label: "Instagram", href: "https://www.instagram.com/zskillup", icon: "instagram" },
-  { label: "YouTube", href: "https://www.youtube.com/@zskillup", icon: "youtube" },
+  { label: "Instagram", href: "https://www.instagram.com/zskillup_/", icon: "instagram" },
+  { label: "YouTube", href: "https://youtube.com/@bylokeshmathur?si=Ts7awWE0Z-hI1luM", icon: "youtube" },
 ] as const;
 
 /**

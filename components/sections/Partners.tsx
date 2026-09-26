@@ -275,7 +275,7 @@ function PartnerTile({ partner }: { partner: Partner }) {
           width={186}
           height={140}
           loading="lazy"
-          className="h-full w-full object-contain"
+          className="h-full max-h-[5rem] w-full max-w-[9rem] object-contain"
         />
       ) : (
         <span

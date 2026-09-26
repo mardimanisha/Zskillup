@@ -42,12 +42,12 @@ export const partners = {
  */
 export const institutionPartners: readonly Partner[] = [
   { name: "Swami Vivekanand Group of Institutes", logo: "/images/partners/swami-vivekanand.jpg" },
-  { name: "VIVA College", logo: "/images/partners/viva-college.jpg" },
-  { name: "Sharda University", logo: "/images/partners/sharda-university.jpg" },
-  { name: "Ajeenkya D Y Patil University", logo: "/images/partners/ajeenkya-dy-patil.jpg" },
+  { name: "VIVA College", logo: "/images/partners/viva-college.png" },
+  { name: "Sharda University", logo: "/images/partners/sharda-university.png" },
+  { name: "Ajeenkya D Y Patil University", logo: "/images/partners/ajeenkya-dy-patil.png" },
   { name: "A.P. Shah Institute of Technology", logo: "/images/partners/ap-shah.jpg" },
   { name: "Atharva College of Engineering", logo: "/images/partners/atharva-college.jpg" },
-  { name: "Sanjivani College of Engineering", logo: "/images/partners/sanjivani-college.jpg" },
+  { name: "Sanjivani College of Engineering", logo: "/images/partners/sanjivani-college.png" },
   { name: "MGM College of Engineering & Technology", logo: "/images/partners/mgm-college.jpg" },
   { name: "College of Engineering & Technology, Varur", logo: "/images/partners/cet-varur.jpg" },
   { name: "WCTM", logo: "/images/partners/wctm.jpg" },

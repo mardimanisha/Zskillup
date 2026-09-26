@@ -152,7 +152,8 @@ export function Leadership() {
                         height={photo.height}
                         loading="lazy"
                         sizes="(min-width: 1280px) 240px, (min-width: 768px) 30vw, (min-width: 640px) 208px, 90vw"
-                        className="h-full w-full object-cover object-top"
+                        className="h-full w-full object-cover"
+                        style={{ objectPosition: photo.position }}
                       />
                     </div>
 

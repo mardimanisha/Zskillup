@@ -23,6 +23,8 @@ export type MediaAsset = {
   alt: string;
   width: number;
   height: number;
+  /** Optional CSS object-position, used to line up faces across cropped portraits. */
+  position?: string;
 };
 
 export const media = {
@@ -65,18 +67,21 @@ export const media = {
       alt: "Portrait of Lokesh Mathur, Founder and Director of ZSkillup",
       width: 1122,
       height: 1402,
+      position: "50% 8%",
     },
     "gaurav-singh": {
-      src: "/images/team/gaurav-singh.png",
+      src: "/images/team/gaurav-singh.jpeg",
       alt: "Portrait of Gaurav Singh, Founder and Director of ZSkillup",
-      width: 1122,
-      height: 1402,
+      width: 1086,
+      height: 1448,
+      position: "50% 30%",
     },
     "manish-temani": {
       src: "/images/team/manish-temani.png",
       alt: "Portrait of Manish Temani, Director of ZSkillup",
       width: 1122,
       height: 1402,
+      position: "50% 9%",
     },
   },
 } satisfies Record<string, MediaAsset | Record<string, MediaAsset>>;
