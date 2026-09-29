@@ -286,8 +286,19 @@ function HeroCard({ card }: { card: (typeof heroCards)[number] }) {
     // scaling the result back down. Removing it is what actually makes the
     // wider/closer-together change in the row below visible on screen.
     <article
-      className={`relative flex h-full min-w-0 flex-col rounded-card border ${style.border} ${style.tint} p-3 shadow-card transition-[scale,translate,box-shadow] duration-[250ms] ease-out hover:z-10 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-lift sm:p-4`}
+      className={`relative flex h-full min-w-0 flex-col overflow-hidden rounded-card border ${style.border} ${style.tint} p-3 shadow-card transition-[scale,translate,box-shadow] duration-[250ms] ease-out hover:z-10 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-lift sm:p-4`}
     >
+      {card.badge ? (
+        <span
+          aria-hidden="true"
+          className={`absolute top-[14px] right-[-34px] z-10 w-[130px] rotate-45 py-1 text-center text-[0.625rem] font-bold tracking-wide text-white shadow-sm ${
+            card.vertical === "commerce" ? "bg-com" : "bg-prep text-prep-ink"
+          }`}
+        >
+          {card.badge}
+        </span>
+      ) : null}
+
       <div className="flex items-start gap-4">
         <span className={`grid h-16 w-16 shrink-0 place-items-center rounded-full ${style.icon}`}>
           <Icon name={cardIcon[card.vertical]} className="h-7 w-7" />

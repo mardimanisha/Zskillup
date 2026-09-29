@@ -60,6 +60,8 @@ export type HeroCard = {
   primary: PathwayCta;
   secondary: PathwayCta;
   video: PathwayCta;
+  /** Optional corner ribbon label, e.g. "NEW". */
+  badge?: string;
 };
 
 export const heroCards: readonly HeroCard[] = [
@@ -80,6 +82,7 @@ export const heroCards: readonly HeroCard[] = [
     primary: { label: "Explore", href: "#prephasz" },
     secondary: { label: "Get Started", href: "https://prephasz.com/" },
     video: { label: "Watch Now", href: "#prephasz" },
+    badge: "NEW",
   },
   {
     vertical: "commerce",
@@ -90,6 +93,7 @@ export const heroCards: readonly HeroCard[] = [
     primary: { label: "Explore", href: "#bcom-acca" },
     secondary: { label: "Talk to an Advisor", href: "#enquire-commerce" },
     video: { label: "Watch Now", href: "#bcom-acca" },
+    badge: "NEW",
   },
 ];
 
