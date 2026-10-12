@@ -128,8 +128,8 @@ export const leadership = {
     },
     {
       slug: "gaurav-singh",
-      /** Hidden for now - set to false to show this card again. */
-      hidden: true,
+      /** Set to true to hide this card. */
+      hidden: false,
       name: "Gaurav Singh",
       role: "Founder & Director",
       bio: "Brings over 15 years of experience in operations, consulting and strategy. A graduate of IIT Kanpur and IIM Udaipur, he has worked with Jio, EY, KPMG and upGrad, and leads operations and strategy.",
