@@ -70,12 +70,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to main content
         </a>
-        {/* One sticky wrapper so the ribbon stays fixed and the header sits directly beneath it
-            whatever the ribbon's height (it wraps to extra rows on mobile). */}
-        <div className="sticky top-0 z-50">
-          <OlympiadRibbon />
-          <SiteHeader />
-        </div>
+        {/* The ribbon is fixed to the top of the viewport; the spacer reserves its h-8 in the
+            flow and the sticky header sits below it (top-8). */}
+        <OlympiadRibbon />
+        <div className="h-8" aria-hidden="true" />
+        <SiteHeader />
         <main id="main" className="flex-1">
           {children}
         </main>

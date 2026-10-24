@@ -48,7 +48,9 @@ export function OlympiadRibbon() {
   });
 
   return (
-    <div className="flex w-full items-center gap-3 bg-gradient-to-br from-[#2f6b5e] to-[#5fae9f] py-1 pl-4 text-white sm:gap-6 sm:pl-8">
+    // Fixed to the top of the viewport; its height (h-8) is mirrored by the spacer in the layout
+    // and by the header's `top-8` offset, so keep the three in sync.
+    <div className="fixed inset-x-0 top-0 z-[60] flex h-8 items-center gap-3 bg-gradient-to-br from-[#2f6b5e] to-[#5fae9f] pl-4 text-white sm:gap-6 sm:pl-8">
       {/* Scrolling headline: two identical halves so sliding exactly -50% loops seamlessly. */}
       <div className="olympiad-marquee min-w-0 flex-1 overflow-hidden">
         <div className="olympiad-track flex w-max">
