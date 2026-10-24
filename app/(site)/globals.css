@@ -274,6 +274,36 @@
   }
 }
 
+/* Olympiad ribbon headline - same two-copies-back-to-back technique, sliding right to left.
+   The countdown and CTA sit outside the track and stay fixed. */
+@keyframes olympiad-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.olympiad-track {
+  animation: olympiad-marquee 35s linear infinite;
+}
+
+.olympiad-marquee:hover .olympiad-track,
+.olympiad-marquee:focus-within .olympiad-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .olympiad-track {
+    animation: none;
+  }
+  .olympiad-copy,
+  .olympiad-track > :first-child > :not(:first-child) {
+    display: none;
+  }
+}
+
 /* Partners marquee - same two-copies-back-to-back technique as the
    testimonials marquee, but one keyframe serves both rows: the bottom row
    plays it forward (right to left), the top row plays it in reverse

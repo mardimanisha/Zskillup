@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/National-Commerce-Olympiad-2026/",
+      "destination": "https://acca-olympiad.vercel.app/National-Commerce-Olympiad-2026"
+    },
+    {
+      "source": "/National-Commerce-Olympiad-2026",
+      "destination": "https://acca-olympiad.vercel.app/National-Commerce-Olympiad-2026"
+    },
+    {
+      "source": "/National-Commerce-Olympiad-2026/:path+",
+      "destination": "https://acca-olympiad.vercel.app/National-Commerce-Olympiad-2026/:path+"
+    }
+  ]
+}

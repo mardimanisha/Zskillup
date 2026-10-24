@@ -1,0 +1,22 @@
+
+> zskillup-web@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.31.38:3000
+- Environments: .env.local
+✓ Ready in 660ms
+✓ Running next.config.ts took 44ms
+
+○ Compiling / ...
+ GET / 200 in 5.2s (next.js: 3.4s, application-code: 1768ms)
+ GET / 200 in 1162ms (next.js: 11ms, application-code: 1151ms)
+ GET /sitemap.xml 200 in 497ms (next.js: 461ms, application-code: 36ms)
+ GET /blog/ 200 in 711ms (next.js: 564ms, application-code: 147ms)
+ GET /events/ 200 in 427ms (next.js: 327ms, application-code: 100ms)
+ GET /admin/login/ 200 in 703ms (next.js: 573ms, application-code: 130ms)
+ GET /blog/post/ 200 in 405ms (next.js: 295ms, application-code: 110ms)
+ GET /events/post/ 200 in 330ms (next.js: 238ms, application-code: 92ms)
+ GET /admin/ 200 in 228ms (next.js: 190ms, application-code: 37ms)
+[?25h

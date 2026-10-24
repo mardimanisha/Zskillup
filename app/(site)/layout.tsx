@@ -3,6 +3,7 @@ import { Caveat, Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/content/site";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SeoSync } from "@/components/layout/SeoSync";
+import { OlympiadRibbon } from "@/components/layout/OlympiadRibbon";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { FloatingEnquiryButtons } from "@/components/sections/FloatingEnquiryButtons";
 import "./globals.css";
@@ -24,7 +25,6 @@ const jakarta = Plus_Jakarta_Sans({
 const caveat = Caveat({
   variable: "--font-caveat",
   subsets: ["latin"],
-  weight: ["600", "700"],
   display: "swap",
 });
 
@@ -70,7 +70,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to main content
         </a>
-        <SiteHeader />
+        {/* One sticky wrapper so the ribbon stays fixed and the header sits directly beneath it
+            whatever the ribbon's height (it wraps to extra rows on mobile). */}
+        <div className="sticky top-0 z-50">
+          <OlympiadRibbon />
+          <SiteHeader />
+        </div>
         <main id="main" className="flex-1">
           {children}
         </main>
