@@ -133,7 +133,7 @@ export const leadership = {
       name: "Gaurav Singh",
       role: "Founder & Director",
       bio: "Brings over 15 years of experience in operations, consulting and strategy. A graduate of IIT Kanpur and IIM Udaipur, he has worked with Jio, EY, KPMG and upGrad, and leads operations and strategy.",
-      linkedin: "https://www.linkedin.com/company/zskillup",
+      linkedin: "https://www.linkedin.com/in/gaurav-singh-z/",
     },
     {
       slug: "manish-temani",
@@ -141,7 +141,7 @@ export const leadership = {
       name: "Manish Temani",
       role: "Director",
       bio: "Brings over 20 years of experience across audit, financial reporting and investment banking. A Chartered Accountant, Company Secretary and US CPA, he guides curriculum development and finance programmes.",
-      linkedin: "https://www.linkedin.com/company/zskillup",
+      linkedin: "https://www.linkedin.com/in/manish-temani-india-topper-ca-cs-us-cpa-764b0915/",
     },
   ],
 } as const;
