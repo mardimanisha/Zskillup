@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Caveat, Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/content/site";
+import { GoogleTag } from "@/components/analytics/GoogleTag";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SeoSync } from "@/components/layout/SeoSync";
 import { OlympiadRibbon } from "@/components/layout/OlympiadRibbon";
@@ -63,6 +64,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-IN" className={`${jakarta.variable} ${caveat.variable} h-full`}>
+      <head>
+        <GoogleTag />
+      </head>
       <body className="flex min-h-full flex-col bg-white antialiased">
         <a
           href="#main"

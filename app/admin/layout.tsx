@@ -12,6 +12,7 @@
  * minimal, plain, internal-tool look.
  */
 import type { Metadata } from "next";
+import { GoogleTag } from "@/components/analytics/GoogleTag";
 import { AdminShell } from "@/components/admin/AdminShell";
 import "./admin.css";
 
@@ -24,6 +25,9 @@ export const metadata: Metadata = {
 export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <GoogleTag />
+      </head>
       <body className="admin-body">
         <AdminShell>{children}</AdminShell>
       </body>
