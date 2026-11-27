@@ -21,8 +21,8 @@ export const site = {
 
 export const contact = {
   locations: "Bangalore | Pune | Jaipur",
-  phone: "+91 9153005252",
-  phoneHref: "tel:+919153005252",
+  phone: "+91 70300 76969",
+  phoneHref: "tel:+917030076969",
   email: "communications@zskillup.com",
   website: "www.zskillup.com",
   websiteHref: "https://www.zskillup.com",

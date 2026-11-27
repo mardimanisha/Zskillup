@@ -149,7 +149,7 @@ open, never on page load.
 
 `content/site.ts` carries details taken from the live zskillup.com build:
 
-- Phone `+91 80500 70534` — verify
+- Phone `+91 70300 76969` — confirmed (Nov 2026)
 - Email `hello@zskillup.com` — **placeholder.** The live site lists
   `Lokesh@zskillup.com` and `Sneha.jadhav@zskillup.com`; a general enquiries
   address is needed
